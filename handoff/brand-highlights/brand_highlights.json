@@ -1,0 +1,1231 @@
+{
+  "updated": "2026-11-03",
+  "note": "Brand thumbnails and short selling points for the K-Beauty Trade Catalog. English fields are buyer-facing; *_kr fields are for internal review. No brand homepage links, supply prices, MOQ or barcodes.",
+  "brands": [
+    {
+      "id": "anua",
+      "name": "ANUA",
+      "kr": "아누아",
+      "listed_products": 85,
+      "thumb": "thumbs/anua.webp",
+      "thumb_source": "catalog image key 920c2df4c49e",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Heartleaf 77% Soothing Toner",
+        "kr": "어성초 77% 수딩 토너"
+      },
+      "tagline_en": "Heartleaf-powered soothing care for sensitive skin",
+      "desc_en": "ANUA built its name on heartleaf (Houttuynia cordata) soothing care and has grown into cleansing oils and targeted brightening serums.",
+      "strengths_en": [
+        "Signature heartleaf line for redness-prone, sensitive skin",
+        "Pore Control Cleansing Oil: oil cleansing that melts sunscreen and makeup",
+        "Actives range: Niacinamide 10% + TXA, PDRN, Retinol, Rice Ceramide"
+      ],
+      "hero_products": [
+        {
+          "en": "Heartleaf 77% Soothing Toner",
+          "kr": "어성초 77% 수딩 토너",
+          "point_en": "Calming daily toner with 77% heartleaf extract",
+          "point_kr": "어성초 추출물 77% 진정 토너"
+        },
+        {
+          "en": "Heartleaf Pore Control Cleansing Oil",
+          "kr": "어성초 포어 컨트롤 클렌징 오일",
+          "point_en": "First-step oil cleanser for pores and blackheads",
+          "point_kr": "모공·블랙헤드 1차 세정 오일"
+        },
+        {
+          "en": "Niacinamide 10% + TXA 4% Serum",
+          "kr": "나이아신아마이드 10% + TXA 4% 세럼",
+          "point_en": "Brightening serum for dark spots and uneven tone",
+          "point_kr": "잡티·톤 개선 미백 세럼"
+        }
+      ],
+      "desc_kr": "어성초 진정 라인으로 알려진 브랜드. 클렌징 오일·미백 세럼까지 라인 확장",
+      "strengths_kr": [
+        "민감 피부 진정용 어성초 시그니처 라인",
+        "모공 클렌징 오일: 선크림·메이크업 세정",
+        "나이아신아마이드 10%+TXA, PDRN, 레티놀 등 기능성 세럼 라인"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "high"
+    },
+    {
+      "id": "beautyofjoseon",
+      "name": "Beauty of Joseon",
+      "kr": "조선미녀",
+      "listed_products": 43,
+      "thumb": "thumbs/beautyofjoseon.webp",
+      "thumb_source": "catalog image key 6ccb525f4f9c",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Relief Sun : Rice + Probiotics",
+        "kr": "맑은쌀 선크림 : 쌀 + 프로바이오틱스"
+      },
+      "tagline_en": "Hanbang-inspired skincare and the Relief Sun range",
+      "desc_en": "Beauty of Joseon reinterprets traditional Korean herbal (hanbang) ingredients such as rice, ginseng and green plum in light, modern formulas. Its Relief Sun is one of the best-known K-beauty sunscreens.",
+      "strengths_en": [
+        "Relief Sun range: lightweight SPF50+ daily sunscreens",
+        "Hanbang ingredients: rice, ginseng, propolis, green plum",
+        "Simple serum lineup at accessible price points"
+      ],
+      "hero_products": [
+        {
+          "en": "Relief Sun : Rice + Probiotics",
+          "kr": "맑은쌀 선크림",
+          "point_en": "Light, no-white-cast daily sunscreen",
+          "point_kr": "백탁 적은 가벼운 데일리 선크림"
+        },
+        {
+          "en": "Glow Serum : Propolis + Niacinamide",
+          "kr": "광채 프로폴리스 세럼",
+          "point_en": "Glow and blemish-care serum",
+          "point_kr": "광채·트러블 케어 세럼"
+        },
+        {
+          "en": "Dynasty Cream",
+          "kr": "조선미녀 크림",
+          "point_en": "Rich moisturizer with rice and ginseng",
+          "point_kr": "쌀·인삼 보습 크림"
+        }
+      ],
+      "desc_kr": "쌀·인삼·청매실 등 한방 원료를 가벼운 제형으로 재해석한 브랜드. 맑은쌀 선크림이 대표 제품",
+      "strengths_kr": [
+        "가벼운 SPF50+ 데일리 선크림 라인",
+        "쌀·인삼·프로폴리스·청매실 등 한방 원료",
+        "합리적 가격대의 단순한 세럼 구성"
+      ],
+      "category_focus": "Skincare / Sun Care",
+      "confidence": "high"
+    },
+    {
+      "id": "braye",
+      "name": "Braye",
+      "kr": "브레이",
+      "listed_products": 0,
+      "thumb": "thumbs/braye.webp",
+      "thumb_source": "Olive Young product image",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Thin Glow Tint",
+        "kr": "씬 글로우 틴트"
+      },
+      "tagline_en": "Effortless 'rough beauty' lip makeup in accessory-style packaging",
+      "desc_en": "BRAYE is a lip-focused makeup brand launched in May 2024 around a 'rough beauty' concept. Its metallic packaging is designed to double as a fashion accessory.",
+      "strengths_en": [
+        "Launch product Lipsleek sold out within an hour",
+        "In Olive Young online and offline about two months after launch",
+        "Layered color + coating tint for lasting color"
+      ],
+      "hero_products": [
+        {
+          "en": "Thin Glow Tint",
+          "kr": "씬 글로우 틴트",
+          "point_en": "Staining glow tint, sold out across shades at launch",
+          "point_kr": "착색형 글로우 틴트, 출시 직후 전 색상 완판"
+        },
+        {
+          "en": "Lipsleek",
+          "kr": "립슬릭",
+          "point_en": "Sliding-case lip and cheek stick",
+          "point_kr": "슬라이딩 용기 립·치크 겸용"
+        },
+        {
+          "en": "Thin Blur Tint",
+          "kr": "씬 블러 틴트",
+          "point_en": "Blur-finish version of the Thin line",
+          "point_kr": "블러 피니시 버전"
+        }
+      ],
+      "desc_kr": "'러프뷰티' 콘셉트의 립 중심 색조 브랜드. 2024년 5월 론칭, 패션 액세서리형 메탈 패키지",
+      "strengths_kr": [
+        "론칭 제품 립슬릭 1시간 내 완판(언론 보도)",
+        "론칭 약 2개월 만에 올리브영 온·오프라인 입점(언론 보도)",
+        "색층·코팅층 분리형 착색 기술(브랜드 주장)"
+      ],
+      "category_focus": "Makeup (Lip)",
+      "confidence": "medium"
+    },
+    {
+      "id": "celimax",
+      "name": "CELIMAX",
+      "kr": "셀리맥스",
+      "listed_products": 57,
+      "thumb": "thumbs/celimax.webp",
+      "thumb_source": "catalog image key 407bb72970c1",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "The Real Noni Energy Ampoule",
+        "kr": "더 리얼 노니 에너지 앰플"
+      },
+      "tagline_en": "Noni energy, Ji Woo Gae pore care and barrier skincare",
+      "desc_en": "CELIMAX is known for its Noni energy line and the Ji Woo Gae (\"eraser\") pore and blemish range, plus barrier and retinal lines.",
+      "strengths_en": [
+        "Noni line: ampoule, toner, cream and pads for skin vitality",
+        "Ji Woo Gae line: BHA and baking soda pore and blemish care",
+        "Dual Barrier and Vita-A Retinal lines for barrier and firming"
+      ],
+      "hero_products": [
+        {
+          "en": "The Real Noni Energy Ampoule",
+          "kr": "더 리얼 노니 에너지 앰플",
+          "point_en": "Signature noni ampoule for tired, dull skin",
+          "point_kr": "지친 피부용 노니 시그니처 앰플"
+        },
+        {
+          "en": "Baking Soda Deep Pore Ji Woo Gae Foam Cleansing",
+          "kr": "베이킹소다 딥 포어 지우개 폼클렌징",
+          "point_en": "Deep pore foam cleanser",
+          "point_kr": "모공 딥 클렌징 폼"
+        },
+        {
+          "en": "Dual Barrier Skin Wearable Cream",
+          "kr": "듀얼 배리어 스킨 웨어러블 크림",
+          "point_en": "Barrier-support moisturizer",
+          "point_kr": "장벽 보습 크림"
+        }
+      ],
+      "desc_kr": "노니 에너지 라인과 지우개(Ji Woo Gae) 모공·트러블 라인으로 알려진 브랜드. 장벽·레티날 라인 보유",
+      "strengths_kr": [
+        "노니 라인: 앰플·토너·크림·패드 구성의 활력 케어",
+        "지우개 라인: BHA·베이킹소다 모공·트러블 케어",
+        "듀얼 배리어·비타A 레티날 라인으로 장벽·탄력 케어"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "medium"
+    },
+    {
+      "id": "centellian24",
+      "name": "Centellian24",
+      "kr": "센텔리안24",
+      "listed_products": 0,
+      "thumb": "thumbs/centellian24.webp",
+      "thumb_source": "Stylevana product image",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Madeca Cream",
+        "kr": "마데카 크림"
+      },
+      "tagline_en": "Centella derma skincare from a pharmaceutical company",
+      "desc_en": "Centellian24 is the derma-cosmetic brand of Dongkook Pharm, launched in 2015. Its flagship Madeca Cream is built on TECA, a titrated centella asiatica extract.",
+      "strengths_en": [
+        "Backed by Dongkook Pharm R&D",
+        "Madeca Cream: over 73 million units sold (as of Mar 2025)",
+        "8-variant Madeca Cream range with beauty award wins"
+      ],
+      "hero_products": [
+        {
+          "en": "Madeca Cream Time Reverse",
+          "kr": "마데카 크림 타임 리버스",
+          "point_en": "TECA anti-aging cream, Cosmo Beauty Award 2024",
+          "point_kr": "TECA 안티에이징 크림, 코스모 뷰티 어워드 2024"
+        },
+        {
+          "en": "Madeca Cream Hydra Calming",
+          "kr": "마데카 크림 하이드라 카밍",
+          "point_en": "Hydrating, calming variant",
+          "point_kr": "수분·진정 버전"
+        },
+        {
+          "en": "360 Shot PDRN Active Serum",
+          "kr": "360샷 PDRN 액티브 세럼",
+          "point_en": "Newer PDRN serum line",
+          "point_kr": "신규 PDRN 세럼"
+        }
+      ],
+      "desc_kr": "동국제약의 더마코스메틱 브랜드(2015년 론칭). 대표 제품 마데카 크림, 핵심 성분 TECA(병풀 정량 추출물)",
+      "strengths_kr": [
+        "동국제약 연구개발 기반",
+        "마데카 크림 누적 7,300만 개 판매(2025.3, 회사 발표)",
+        "마데카 크림 8종 라인업, 뷰티 어워드 수상"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "high"
+    },
+    {
+      "id": "charde",
+      "name": "Charde",
+      "kr": "샤르드",
+      "listed_products": 0,
+      "thumb": "thumbs/charde.webp",
+      "thumb_source": "Olive Young product image",
+      "image_status": "replace_later",
+      "image_note": "구 패키지(MELAPEEL 표기). 리뉴얼 패키샷 요청 필요",
+      "hero_product": {
+        "en": "Melacare Peel Cream Mask",
+        "kr": "멜라케어 필크림 마스크"
+      },
+      "tagline_en": "Functional slow-aging care for dark spots and firmness",
+      "desc_en": "CHARDE is a functional skincare brand (since 2019) focused on dark-spot, lifting and eye-area care, sold through Musinsa and Olive Young.",
+      "strengths_en": [
+        "Peel-off dark-spot cream mask with 5 clinical tests",
+        "Proprietary complexes such as Mela-Melting",
+        "Lifthera Gel Mask ranks #1 on its Musinsa brand page"
+      ],
+      "hero_products": [
+        {
+          "en": "Melacare Peel Cream Mask",
+          "kr": "멜라케어 필크림 마스크",
+          "point_en": "Apply-and-peel dark-spot care mask",
+          "point_kr": "바르고 떼어내는 기미 케어 마스크"
+        },
+        {
+          "en": "Lifthera Gel Mask",
+          "kr": "리프쎄라 겔 마스크",
+          "point_en": "Firming, lifting gel mask",
+          "point_kr": "탄력·리프팅 겔 마스크"
+        },
+        {
+          "en": "Eye Bag Lift 1100 Shot Patch",
+          "kr": "아이백 리프트 1100샷 패치",
+          "point_en": "Eye-area firming patch",
+          "point_kr": "눈가 탄력 패치"
+        }
+      ],
+      "desc_kr": "기미·탄력·눈가 케어 중심 슬로우에이징 기능성 스킨케어(2019년~). 무신사·올리브영 유통",
+      "strengths_kr": [
+        "기미 임상 5종 완료 필크림 마스크(브랜드 주장)",
+        "멜라멜팅 등 독자 성분",
+        "리프쎄라 겔 마스크 무신사 브랜드 랭킹 1위"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "medium"
+    },
+    {
+      "id": "crebeau",
+      "name": "crebeau",
+      "kr": "끄레뷰",
+      "listed_products": 0,
+      "thumb": "thumbs/crebeau.webp",
+      "thumb_source": "tradekorea brand minisite",
+      "image_status": "ok",
+      "image_note": "근거 약함. 브랜드사 소개서로 확인 필요",
+      "hero_product": {
+        "en": "Water Active Cream",
+        "kr": "워터액티브 크림"
+      },
+      "tagline_en": "Placenta and pearl skincare",
+      "desc_en": "CreBeau ('Create Beauty') makes placenta- and pearl-based skincare, including multi-piece skincare sets, and exports across Asia.",
+      "strengths_en": [
+        "Whitening and anti-wrinkle dual-function cream",
+        "Placenta and pearl (conchiolin) extracts",
+        "Export experience in China, Indonesia, Thailand and Vietnam"
+      ],
+      "hero_products": [
+        {
+          "en": "Water Active Cream",
+          "kr": "워터액티브 크림",
+          "point_en": "Dual-function cream with peptides and CoQ10",
+          "point_kr": "펩타이드·CoQ10 이중 기능성 크림"
+        },
+        {
+          "en": "Premium Skincare 5-piece Set",
+          "kr": "프리미엄 스킨케어 5종 세트",
+          "point_en": "Toner, emulsion, night cream, eye cream, ampoule",
+          "point_kr": "토너·에멀젼·나이트·아이크림·앰플"
+        },
+        {
+          "en": "Soft Touch Sunscreen SPF45",
+          "kr": "소프트터치 선크림 SPF45",
+          "point_en": "Daily sunscreen",
+          "point_kr": "데일리 선크림"
+        }
+      ],
+      "desc_kr": "'Create Beauty'에서 온 이름. 플라센타·진주 성분 스킨케어, 세트 구성, 아시아 수출",
+      "strengths_kr": [
+        "미백·주름개선 이중 기능성 크림(브랜드 주장)",
+        "플라센타·진주(콘키올린) 추출물",
+        "중국·인도네시아·태국·베트남 수출 경험"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "low"
+    },
+    {
+      "id": "donginbi",
+      "name": "DONGINBI",
+      "kr": "동인비",
+      "listed_products": 0,
+      "thumb": "thumbs/donginbi.webp",
+      "thumb_source": "DONGINBI online store",
+      "image_status": "ok",
+      "image_note": "원본의 수상 배지는 지움",
+      "hero_product": {
+        "en": "Red Ginseng Daily Defense Capsule Ampoule",
+        "kr": "자생 원액캡슐 앰플"
+      },
+      "tagline_en": "Korean red ginseng skincare from KGC (Jung Kwan Jang)",
+      "desc_en": "DONGINBI is the red ginseng skincare brand of Korea Ginseng Corporation (Jung Kwan Jang). Its Daily Defense line pairs red ginseng actives with barrier care.",
+      "strengths_en": [
+        "Backed by KGC, made with 6-year-grown red ginseng",
+        "Capsule ampoule with red ginseng oil and ceramide",
+        "Award-winning ampoule: Allure Korea 2023, Singles 2024 Best Ampoule"
+      ],
+      "hero_products": [
+        {
+          "en": "Daily Defense Capsule Ampoule",
+          "kr": "자생 원액캡슐 앰플",
+          "point_en": "Red ginseng barrier and firming ampoule",
+          "point_kr": "홍삼 장벽·탄력 앰플"
+        },
+        {
+          "en": "Daily Defense Cream",
+          "kr": "자생 크림",
+          "point_en": "Signature barrier cream",
+          "point_kr": "시그니처 장벽 크림"
+        },
+        {
+          "en": "Hydra Glow Cream EX",
+          "kr": "하이드라 글로우 크림 EX",
+          "point_en": "Rich cream with red ginseng hyaluronic acid",
+          "point_kr": "홍삼 히알루론산 리치 크림"
+        }
+      ],
+      "desc_kr": "정관장(한국인삼공사)의 홍삼 스킨케어 브랜드. 데일리 디펜스 라인 중심 홍삼 성분·장벽 케어",
+      "strengths_kr": [
+        "정관장 6년근 홍삼 원료(브랜드 주장)",
+        "홍삼 오일·세라마이드 캡슐 앰플",
+        "얼루어 코리아 2023, 싱글즈 2024 베스트 앰플 수상"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "medium"
+    },
+    {
+      "id": "dralthea",
+      "name": "Dr.Althea",
+      "kr": "닥터엘시아",
+      "listed_products": 50,
+      "thumb": "thumbs/dralthea.webp",
+      "thumb_source": "catalog image key da92ddcaef4a",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "345 Relief Cream",
+        "kr": "345 릴리프 크림"
+      },
+      "tagline_en": "Gentle derma skincare for sensitive, blemish-prone skin",
+      "desc_en": "Dr.Althea makes gentle derma skincare: cleansers, toners, pads, serums and SPF. Its 345 Relief Cream is a lightweight gel cream for post-blemish, sensitive skin.",
+      "strengths_en": [
+        "345 Relief Cream: 3 blemish-care, 4 nourishing and 5 soothing ingredients",
+        "Gentle amino acid and gel cleansers for daily use",
+        "Barrier and repair creams: 147 Barrier, PDRN Reju, Niathione"
+      ],
+      "hero_products": [
+        {
+          "en": "345 Relief Cream",
+          "kr": "345 릴리프 크림",
+          "point_en": "Lightweight gel cream with niacinamide, panthenol and centella",
+          "point_kr": "나이아신아마이드·판테놀·병풀 함유 젤 크림"
+        },
+        {
+          "en": "147 Barrier Cream",
+          "kr": "147 배리어 크림",
+          "point_en": "Barrier-focused moisturizer",
+          "point_kr": "장벽 강화 보습 크림"
+        },
+        {
+          "en": "Amino Acid Gentle Bubble Cleanser",
+          "kr": "아미노산 젠틀 버블 클렌저",
+          "point_en": "Mild low-irritation daily cleanser",
+          "point_kr": "저자극 데일리 클렌저"
+        }
+      ],
+      "desc_kr": "순한 더마 스킨케어 브랜드. 대표 345 릴리프 크림은 트러블 후 민감 피부용 가벼운 젤 크림",
+      "strengths_kr": [
+        "345 릴리프 크림: 트러블 3종·영양 4종·진정 5종 성분 조합(브랜드 주장)",
+        "데일리용 아미노산·젤 클렌저",
+        "147 배리어·PDRN 리쥬·나이아치온 등 장벽·리페어 크림"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "high"
+    },
+    {
+      "id": "eiom",
+      "name": "EIOM",
+      "kr": "이옴",
+      "listed_products": 0,
+      "thumb": "thumbs/eiom.webp",
+      "thumb_source": "Olive Young product image",
+      "image_status": "replace_later",
+      "image_note": "마케팅 이미지(한글 문구 포함). 흰 배경 패키샷 요청 필요",
+      "hero_product": {
+        "en": "Trouble Patch Mask",
+        "kr": "트러블 패치 마스크"
+      },
+      "tagline_en": "Microbiome-based blemish care, led by a patch mask",
+      "desc_en": "EIOM is a derma skincare brand for blemish-prone skin built on skin microbiome balance. Its hero is a full-face patch mask that lifts sebum and debris.",
+      "strengths_en": [
+        "Bio-cellulose sheet that lifts sebum and dead skin",
+        "Patch Mask passed 3.62M units sold (as of Aug 2026)",
+        "Olive Young Pick (Jun and Aug 2026), #1 in category on Qoo10 Japan"
+      ],
+      "hero_products": [
+        {
+          "en": "Trouble Patch Mask",
+          "kr": "트러블 패치 마스크",
+          "point_en": "Full-face patch, you can see what it lifted",
+          "point_kr": "얼굴 전체 패치, 흡착 결과 확인 가능"
+        },
+        {
+          "en": "Trouble Control Pad 70P",
+          "kr": "트러블 컨트롤 패드",
+          "point_en": "Daily blemish-care pad",
+          "point_kr": "데일리 트러블 패드"
+        },
+        {
+          "en": "Trouble Red Shot 20 Cleaner",
+          "kr": "트러블 레드샷 20 클리너",
+          "point_en": "Spot-care serum",
+          "point_kr": "트러블 집중 세럼"
+        }
+      ],
+      "desc_kr": "피부 마이크로바이옴 균형 기반 트러블 케어 더마 브랜드. 대표 제품 얼굴 전체 패치형 마스크",
+      "strengths_kr": [
+        "피지·각질 흡착 바이오셀룰로오스 시트(브랜드 주장)",
+        "패치 마스크 누적 362만 장(2026.8, 회사 발표)",
+        "올영픽 선정(2026.6·8), 일본 큐텐 카테고리 1위"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "high"
+    },
+    {
+      "id": "franz",
+      "name": "FRANZ",
+      "kr": "프란츠",
+      "listed_products": 28,
+      "thumb": "thumbs/franz.webp",
+      "thumb_source": "catalog image key 3c861e9438d7",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Stem Cell Culture Medium Ampoule",
+        "kr": "줄기세포 배양액 앰플"
+      },
+      "tagline_en": "Doctor-developed patches, trouble care and ampoules",
+      "desc_en": "FRANZ develops patches, trouble care and masks in collaboration with doctors. Supplied to Olive Young, Costco and TJ Maxx.",
+      "strengths_en": [
+        "Stem cell culture medium ampoules in 10% and 30% strengths",
+        "Naked spot and sunshield patch range",
+        "Meli-Cica trouble care line and sun pods"
+      ],
+      "hero_products": [
+        {
+          "en": "Stem Cell Culture Medium 10% Ampoule",
+          "kr": "줄기세포 배양액 10% 앰플",
+          "point_en": "Single-dose syringe-type ampoule",
+          "point_kr": "1회용 주사기형 앰플"
+        },
+        {
+          "en": "Naked Sunshield Peptide Patch",
+          "kr": "네이키드 선쉴드 펩타이드 패치",
+          "point_en": "Patch that shields the face from sun",
+          "point_kr": "자외선 차단용 얼굴 패치"
+        },
+        {
+          "en": "Meli-Cica Trouble Control Toner",
+          "kr": "멜리시카 트러블 컨트롤 토너",
+          "point_en": "Trouble-care toner",
+          "point_kr": "트러블 케어 토너"
+        }
+      ],
+      "desc_kr": "의사 협업으로 개발한 패치·트러블 케어·마스크 브랜드. 올리브영·코스트코·TJ Maxx 공급",
+      "strengths_kr": [
+        "줄기세포 배양액 10%·30% 앰플",
+        "네이키드 스팟·선쉴드 패치 라인",
+        "멜리시카 트러블 케어 라인·선팟"
+      ],
+      "category_focus": "Skincare / Patches",
+      "confidence": "medium"
+    },
+    {
+      "id": "jennyhouse",
+      "name": "JENNYHOUSE",
+      "kr": "제니하우스",
+      "listed_products": 37,
+      "thumb": "thumbs/jennyhouse.webp",
+      "thumb_source": "catalog image key 834743e268c5",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Salon Spa Shine Silk Hair Oil",
+        "kr": "살롱스파 샤인 실크 헤어오일"
+      },
+      "tagline_en": "Cheongdam salon expertise for home hair care and color",
+      "desc_en": "Salon hair color and hair care developed by the Jenny House salon in Cheongdam, Seoul.",
+      "strengths_en": [
+        "Salon-developed formulas from Cheongdam, Seoul",
+        "At-home hair color: cream and pudding types, wide shade range",
+        "Damage care: collagen shampoo, heat-protect oil serum, quick-dry mist"
+      ],
+      "hero_products": [
+        {
+          "en": "Salon Therapy Damage Care Hair Oil Serum",
+          "kr": "살롱테라피 데미지케어 헤어오일세럼",
+          "point_en": "Concentrated heat-protect perfume oil serum",
+          "point_kr": "고농축 열보호 퍼퓸 오일 세럼"
+        },
+        {
+          "en": "Salon Code Glam Hair Color",
+          "kr": "살롱코드 글램 헤어컬러",
+          "point_en": "Easy at-home salon-tone hair color",
+          "point_kr": "간편한 셀프 살롱톤 염색"
+        },
+        {
+          "en": "Self-Up Hair Cover Mascara",
+          "kr": "셀프업 새치커버 마스카라",
+          "point_en": "One-touch gray hair cover",
+          "point_kr": "원터치 새치 커버"
+        }
+      ],
+      "desc_kr": "서울 청담 제니하우스 살롱이 개발한 헤어 컬러·헤어케어 브랜드",
+      "strengths_kr": [
+        "서울 청담 살롱 개발 포뮬러",
+        "홈 염색: 크림·푸딩 타입, 다양한 컬러",
+        "손상 케어: 콜라겐 샴푸·열보호 오일 세럼·퀵드라이 미스트"
+      ],
+      "category_focus": "Hair Care",
+      "confidence": "high"
+    },
+    {
+      "id": "keym",
+      "name": "KEYM",
+      "kr": "키임",
+      "listed_products": 0,
+      "thumb": "thumbs/keym.webp",
+      "thumb_source": "KEYM official store",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Lip Glow Bow",
+        "kr": "립 글로우 보우"
+      },
+      "tagline_en": "Bow-shaped lip glow you can wear as a keyring",
+      "desc_en": "KEYM makes bow-shaped lip glows that clip onto bags as keyrings, an 'object beauty' concept popular with Gen Z.",
+      "strengths_en": [
+        "Bow-shaped case with a detachable silicone ring",
+        "Essence Lip Glow shades with PDRN and peptides",
+        "Picked by Harper's Bazaar Korea (May 2026) for cute packaging"
+      ],
+      "hero_products": [
+        {
+          "en": "Lip Glow Bow",
+          "kr": "립 글로우 보우",
+          "point_en": "Glossy lip in a keyring bow case",
+          "point_kr": "키링 리본 케이스 글로우 립"
+        },
+        {
+          "en": "Essence Lip Glow Bow",
+          "kr": "에센스 립 글로우 보우",
+          "point_en": "Care-type lip glow with PDRN",
+          "point_kr": "PDRN 케어형 립 글로우"
+        },
+        {
+          "en": "Glaze Lip Glow Bow",
+          "kr": "글레이즈 립 글로우 보우",
+          "point_en": "Gradient-color bow edition",
+          "point_kr": "그라데이션 컬러 에디션"
+        }
+      ],
+      "desc_kr": "가방에 거는 리본형 키링 립 브랜드. Z세대 대상 '오브제 뷰티' 콘셉트",
+      "strengths_kr": [
+        "탈부착 실리콘 링 리본형 케이스",
+        "PDRN·펩타이드 함유 에센스 립 글로우",
+        "하퍼스 바자 코리아 2026.5 패키지 립 선정"
+      ],
+      "category_focus": "Makeup (Lip)",
+      "confidence": "medium"
+    },
+    {
+      "id": "kitschcatch",
+      "name": "KITSCH CATCH",
+      "kr": "키치캐치",
+      "listed_products": 24,
+      "thumb": "thumbs/kitschcatch.webp",
+      "thumb_source": "catalog image key d6170e4b9b40",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Cheeky Color Balm",
+        "kr": "치키 컬러 밤"
+      },
+      "tagline_en": "Playful eyeshadows and color balms",
+      "desc_en": "KITSCH CATCH makes playful color makeup: single eyeshadows, color balms for lips and cheeks, and colored eyeliners.",
+      "strengths_en": [
+        "Cheeky Color Balm: soft-matte balm for lips and cheeks",
+        "Playful Eyeshadow in matte and glitter finishes",
+        "Festive Eye Liner in bold and everyday colors"
+      ],
+      "hero_products": [
+        {
+          "en": "Cheeky Color Balm",
+          "kr": "치키 컬러 밤",
+          "point_en": "Whipped-cream feel matte balm, 8 shades",
+          "point_kr": "휘핑크림 같은 매트 밤, 8가지 컬러"
+        },
+        {
+          "en": "Playful Eyeshadow",
+          "kr": "플레이풀 아이섀도우",
+          "point_en": "Single shadows in matte and glitter",
+          "point_kr": "매트·글리터 싱글 섀도우"
+        },
+        {
+          "en": "Festive Eye Liner",
+          "kr": "페스티브 아이라이너",
+          "point_en": "Color eyeliners from mild black to soda blue",
+          "point_kr": "마일드 블랙부터 소다 블루까지 컬러 라이너"
+        }
+      ],
+      "desc_kr": "싱글 섀도우·립앤치크 컬러밤·컬러 아이라이너 중심의 경쾌한 색조 브랜드",
+      "strengths_kr": [
+        "치키 컬러 밤: 립·치크 겸용 소프트 매트 밤",
+        "매트·글리터 플레이풀 섀도우",
+        "비비드·데일리 컬러 페스티브 아이라이너"
+      ],
+      "category_focus": "Makeup",
+      "confidence": "medium"
+    },
+    {
+      "id": "kundal",
+      "name": "KUNDAL",
+      "kr": "쿤달",
+      "listed_products": 151,
+      "thumb": "thumbs/kundal.webp",
+      "thumb_source": "catalog image key 702c7250ae1e",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Honey & Macadamia Pure Body Wash",
+        "kr": "허니 앤 마카다미아 퓨어 바디워시"
+      },
+      "tagline_en": "Fragrance-led hair and body care with honey & macadamia",
+      "desc_en": "KUNDAL (est. 2016) pairs botanical ingredients with in-house fragrances across shampoo, body wash and lotion, sold in a wide range of scents.",
+      "strengths_en": [
+        "Signature Honey & Macadamia line across hair and body",
+        "Scents crafted by in-house perfumers, many fragrance options",
+        "pH-balanced, gentle formulas (pH 5.5 body wash)"
+      ],
+      "hero_products": [
+        {
+          "en": "Honey & Macadamia Pure Body Wash 500ml",
+          "kr": "허니 앤 마카다미아 퓨어 바디워시 500ml",
+          "point_en": "Moisturizing body wash with 42% aloe, many scents",
+          "point_kr": "알로에 42% 보습 바디워시, 다양한 향"
+        },
+        {
+          "en": "Honey & Macadamia Shampoo",
+          "kr": "허니 앤 마카다미아 샴푸",
+          "point_en": "Mild weakly acidic shampoo with botanical extracts",
+          "point_kr": "식물 추출물 약산성 샴푸"
+        },
+        {
+          "en": "Macadamia & Sugar Body Scrub",
+          "kr": "마카다미아 앤 슈가 바디 스크럽",
+          "point_en": "Sugar body scrub",
+          "point_kr": "슈가 바디 스크럽"
+        }
+      ],
+      "desc_kr": "2016년 설립. 식물 유래 성분과 자체 조향 향을 결합한 헤어·바디 브랜드. 다양한 향 라인업",
+      "strengths_kr": [
+        "헤어·바디 공통 허니 앤 마카다미아 시그니처 라인",
+        "자체 조향사의 향, 폭넓은 향 선택지",
+        "약산성 순한 포뮬러(바디워시 pH 5.5, 브랜드 주장)"
+      ],
+      "category_focus": "Hair & Body",
+      "confidence": "high"
+    },
+    {
+      "id": "losykim",
+      "name": "Losy Kim",
+      "kr": "로지킴",
+      "listed_products": 0,
+      "thumb": "thumbs/losykim.webp",
+      "thumb_source": "Losy Kim US store",
+      "image_status": "ok",
+      "image_note": "베이지 배경 제거, 배지·스와치 지움",
+      "hero_product": {
+        "en": "PDRN Tinted Lip Ampoule",
+        "kr": "PDRN 틴티드 립 앰플"
+      },
+      "tagline_en": "Healthy-glow makeup with skincare ingredients",
+      "desc_en": "Losy Kim is a Seoul makeup brand launched in 2025. Its PDRN Tinted Lip Ampoule is a bestseller on Olive Young Global.",
+      "strengths_en": [
+        "Tinted lip ampoule with PDRN, 13-14 shades",
+        "Vegan (V-Label) formulas and PCR packaging",
+        "Musinsa rating 4.8 with 1,000+ reviews"
+      ],
+      "hero_products": [
+        {
+          "en": "PDRN Tinted Lip Ampoule",
+          "kr": "PDRN 틴티드 립 앰플",
+          "point_en": "Skincare-type tint with metal slanted tip",
+          "point_kr": "메탈 사선 팁 스킨케어형 틴트"
+        },
+        {
+          "en": "TXA Healthy Glow BB Essence",
+          "kr": "TXA 헬시 글로우 비비 에센스",
+          "point_en": "Essence-based BB, 3 shades",
+          "point_kr": "에센스 베이스 BB, 3호"
+        },
+        {
+          "en": "VOL Mellow Blushing Serum",
+          "kr": "VOL 멜로우 블러싱 세럼",
+          "point_en": "Liquid blusher, 7 colors",
+          "point_kr": "리퀴드 블러셔 7색"
+        }
+      ],
+      "desc_kr": "2025년 론칭 서울 메이크업 브랜드. PDRN 틴티드 립 앰플이 올리브영 글로벌 베스트",
+      "strengths_kr": [
+        "PDRN 함유 틴티드 립 앰플, 13~14색",
+        "비건(V-Label)·PCR 패키지(브랜드 주장)",
+        "무신사 평점 4.8, 후기 1천 건 이상"
+      ],
+      "category_focus": "Makeup",
+      "confidence": "high"
+    },
+    {
+      "id": "lowlize",
+      "name": "Lowlize",
+      "kr": "로우라이즈",
+      "listed_products": 0,
+      "thumb": "thumbs/lowlize.webp",
+      "thumb_source": "Musinsa product image",
+      "image_status": "ok",
+      "image_note": "회녹색 배경 제거",
+      "hero_product": {
+        "en": "Skin Repair Serum",
+        "kr": "스킨 리페어 세럼"
+      },
+      "tagline_en": "Clean, soothing skincare for the moisture barrier",
+      "desc_en": "Lowlize is a 'clean-clinical' skincare brand launched in October 2025 and sold through Musinsa, with a soothing and moisture-barrier routine.",
+      "strengths_en": [
+        "Soothing, moisture-barrier focused line",
+        "Full routine: toner, serum, cream, cleanser, mask, sun serum",
+        "High Musinsa ratings: serum 4.8, sun serum 4.9"
+      ],
+      "hero_products": [
+        {
+          "en": "Skin Repair Serum",
+          "kr": "스킨 리페어 세럼",
+          "point_en": "Calming serum for stressed skin",
+          "point_kr": "예민 피부 진정 세럼"
+        },
+        {
+          "en": "First Balancing Toner 400ml",
+          "kr": "퍼스트 밸런싱 토너 400ml",
+          "point_en": "Large first-step toner",
+          "point_kr": "대용량 첫 단계 토너"
+        },
+        {
+          "en": "Airy Dew Sun Serum",
+          "kr": "에어리 듀 선세럼",
+          "point_en": "Light sun serum for sensitive skin",
+          "point_kr": "민감 피부용 가벼운 선세럼"
+        }
+      ],
+      "desc_kr": "2025년 10월 론칭 클린니컬 스킨케어. 무신사 유통, 속진정·수분장벽 루틴",
+      "strengths_kr": [
+        "속진정·수분장벽 중심 라인",
+        "토너·세럼·크림·클렌저·마스크·선세럼 풀 루틴",
+        "무신사 평점 세럼 4.8, 선세럼 4.9"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "medium"
+    },
+    {
+      "id": "medicube",
+      "name": "medicube",
+      "kr": "메디큐브",
+      "listed_products": 173,
+      "thumb": "thumbs/medicube.webp",
+      "thumb_source": "catalog image key b1bff48f32b5",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Zero Pore Pad 2.0",
+        "kr": "제로 모공 패드 2.0"
+      },
+      "tagline_en": "Derma skincare lines and AGE-R home beauty devices",
+      "desc_en": "medicube offers derma skincare lines (Zero Pore, PDRN, Collagen, Kojic Acid) and AGE-R home beauty devices.",
+      "strengths_en": [
+        "Zero Pore line: AHA/BHA pads, serums and cleansers for pores",
+        "PDRN, Collagen and Kojic Acid lines for repair and brightening",
+        "AGE-R home beauty devices alongside skincare"
+      ],
+      "hero_products": [
+        {
+          "en": "Zero Pore Pad 2.0",
+          "kr": "제로 모공 패드 2.0",
+          "point_en": "AHA/BHA exfoliating pad for pores and sebum",
+          "point_kr": "모공·피지 케어 AHA·BHA 각질 패드"
+        },
+        {
+          "en": "Kojic Acid Turmeric line",
+          "kr": "코직산 강황 라인",
+          "point_en": "Brightening care for dull tone",
+          "point_kr": "칙칙한 톤 브라이트닝 케어"
+        },
+        {
+          "en": "AGE-R devices",
+          "kr": "AGE-R 디바이스",
+          "point_en": "Home beauty devices",
+          "point_kr": "홈뷰티 디바이스"
+        }
+      ],
+      "desc_kr": "제로 모공·PDRN·콜라겐·코직산 등 더마 스킨케어 라인과 AGE-R 홈뷰티 디바이스 보유",
+      "strengths_kr": [
+        "제로 모공 라인: AHA·BHA 패드·세럼·클렌저",
+        "PDRN·콜라겐·코직산 라인으로 리페어·브라이트닝",
+        "스킨케어와 연계한 AGE-R 홈뷰티 디바이스"
+      ],
+      "category_focus": "Skincare / Devices",
+      "confidence": "high"
+    },
+    {
+      "id": "mixsoon",
+      "name": "MIXSOON",
+      "kr": "믹순",
+      "listed_products": 168,
+      "thumb": "thumbs/mixsoon.webp",
+      "thumb_source": "catalog image key bd90afe1ad04",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Bean Essence",
+        "kr": "콩 에센스"
+      },
+      "tagline_en": "Single-ingredient essences, vegan certified",
+      "desc_en": "MIXSOON focuses on single-ingredient essences such as Centella, Bean and Bifida. Vegan certified.",
+      "strengths_en": [
+        "Single-ingredient concept: one hero ingredient per essence",
+        "Bean Essence: fermented soybean essence with a gentle exfoliating feel",
+        "Vegan certified range of essences and toners"
+      ],
+      "hero_products": [
+        {
+          "en": "Bean Essence",
+          "kr": "콩 에센스",
+          "point_en": "Fermented soybean essence for smooth texture",
+          "point_kr": "발효 콩 에센스, 매끈한 피부결"
+        },
+        {
+          "en": "Soondy Centella Asiatica Essence",
+          "kr": "순디 병풀 에센스",
+          "point_en": "Calming centella essence",
+          "point_kr": "병풀 진정 에센스"
+        },
+        {
+          "en": "Bifida Ferment Essence",
+          "kr": "비피다 발효 에센스",
+          "point_en": "Ferment essence for skin barrier",
+          "point_kr": "장벽 케어 발효 에센스"
+        }
+      ],
+      "desc_kr": "병풀·콩·비피다 등 단일 원료 에센스 중심 브랜드. 비건 인증",
+      "strengths_kr": [
+        "원료 하나에 집중한 단일 성분 콘셉트",
+        "콩 에센스: 발효 콩 기반 순한 각질 케어",
+        "비건 인증 에센스·토너 라인"
+      ],
+      "category_focus": "Skincare",
+      "confidence": "medium"
+    },
+    {
+      "id": "percentro",
+      "name": "percentro",
+      "kr": "퍼센트로",
+      "listed_products": 0,
+      "thumb": "thumbs/percentro.webp",
+      "thumb_source": "Musinsa product image",
+      "image_status": "ok",
+      "image_note": "회색 배경 제거. 박스 문구 많음",
+      "hero_product": {
+        "en": "Wrinkle RED Mask",
+        "kr": "링클 알이디 마스크"
+      },
+      "tagline_en": "Sheet masks with clinical results on the box",
+      "desc_en": "percentro is a sheet-mask brand from a mask-fabric specialist that supplies 250+ brands. Each SKU uses its own premium sheet fabric and shows clinical figures on pack.",
+      "strengths_en": [
+        "Clinical result percentages printed on pack",
+        "A different premium sheet fabric per SKU",
+        "Concern-based range: hydrating, brightening, calming, wrinkle"
+      ],
+      "hero_products": [
+        {
+          "en": "Wrinkle RED Mask",
+          "kr": "링클 알이디 마스크",
+          "point_en": "Lifting-focused mask with 4-week clinical figures",
+          "point_kr": "4주 임상 수치 표기 리프팅 마스크"
+        },
+        {
+          "en": "Hydrating DEP Mask",
+          "kr": "하이드레이팅 디이피 마스크",
+          "point_en": "Hydration mask for dry skin",
+          "point_kr": "건성 피부 수분 마스크"
+        },
+        {
+          "en": "Calming MEM Mask",
+          "kr": "카밍 엠이엠 마스크",
+          "point_en": "Calming mask",
+          "point_kr": "진정 마스크"
+        }
+      ],
+      "desc_kr": "250여 개 브랜드에 원단을 공급하는 마스크 원단 전문 기업의 마스크팩 브랜드. SKU별 프리미엄 원단, 패키지에 임상 수치 표기",
+      "strengths_kr": [
+        "패키지에 임상 수치 표기",
+        "SKU별 프리미엄 시트 원단",
+        "수분·브라이트닝·진정·주름 고민별 라인"
+      ],
+      "category_focus": "Skincare (Masks)",
+      "confidence": "medium"
+    },
+    {
+      "id": "phytos",
+      "name": "Phytos",
+      "kr": "피토스",
+      "listed_products": 0,
+      "thumb": "thumbs/phytos.webp",
+      "thumb_source": "Phytos official site",
+      "image_status": "replace_later",
+      "image_note": "공식 이미지 해상도 낮음. 고해상도 요청 권장",
+      "hero_product": {
+        "en": "Phytopecia Plus Hair Boosting Shampoo",
+        "kr": "피토페시아 플러스 헤어 부스팅 샴푸"
+      },
+      "tagline_en": "P1P bio-technology scalp care and skincare",
+      "desc_en": "Phytos is a bio-pharma-rooted cosmetics company (founded 2010) built around P1P, a platelet-derived ingredient. It runs the Phytopecia scalp-care brand and P1P skincare.",
+      "strengths_en": [
+        "Hair-loss symptom relief functional shampoo (Korea MFDS reported)",
+        "P1P ingredient with micro-emulsion delivery",
+        "Scalp care plus P1P skincare ampoules and masks"
+      ],
+      "hero_products": [
+        {
+          "en": "Phytopecia Plus Hair Boosting Shampoo",
+          "kr": "피토페시아 플러스 헤어 부스팅 샴푸",
+          "point_en": "Mildly acidic functional shampoo with P1P",
+          "point_kr": "P1P 함유 약산성 기능성 샴푸"
+        },
+        {
+          "en": "Phytopecia Scalp Essence",
+          "kr": "피토페시아 스칼프 에센스",
+          "point_en": "Leave-on scalp essence",
+          "point_kr": "두피 에센스"
+        },
+        {
+          "en": "P1P Dr Magic Care",
+          "kr": "피원피 닥터 매직케어",
+          "point_en": "P1P + tranexamic acid ampoule",
+          "point_kr": "P1P·트라넥삼산 앰플"
+        }
+      ],
+      "desc_kr": "혈소판 유래 P1P 성분 기반 바이오 화장품 기업(2010년 설립). 두피 케어 브랜드 피토페시아와 P1P 스킨케어 운영",
+      "strengths_kr": [
+        "식약처 보고 탈모 증상 완화 기능성 샴푸",
+        "P1P 성분·마이크로에멀젼 전달 기술(브랜드 주장)",
+        "두피 케어와 P1P 앰플·마스크 병행"
+      ],
+      "category_focus": "Hair & Scalp / Skincare",
+      "confidence": "medium"
+    },
+    {
+      "id": "piciberry",
+      "name": "piciberry",
+      "kr": "피치베리",
+      "listed_products": 0,
+      "thumb": "thumbs/piciberry.webp",
+      "thumb_source": "piciberry official store",
+      "image_status": "replace_later",
+      "image_note": "원본 500px로 작음",
+      "hero_product": {
+        "en": "Berry Shadow",
+        "kr": "베리섀도우"
+      },
+      "tagline_en": "Multi-use pastel makeup by a makeup artist",
+      "desc_en": "piciberry is a makeup brand created by makeup artist Park Sang-eun. Its pastel multi-use pencils work as eyeshadow, aegyo-sal liner, blush or lip liner.",
+      "strengths_en": [
+        "Multi-use pencil for eyes, cheeks and lips",
+        "Soft formula that does not crumble",
+        "Distinct pastel peach and pink identity"
+      ],
+      "hero_products": [
+        {
+          "en": "Berry Shadow",
+          "kr": "베리섀도우",
+          "point_en": "Shadow, blush and lip liner in one pencil",
+          "point_kr": "섀도우·블러셔·립라이너 겸용 펜슬"
+        },
+        {
+          "en": "Berry Lip Balm",
+          "kr": "베리립밤",
+          "point_en": "Moisturizing MLBB lip balm",
+          "point_kr": "촉촉한 MLBB 립밤"
+        },
+        {
+          "en": "31°C Moisture Mist",
+          "kr": "31℃ 모이스처 미스트",
+          "point_en": "Skincare line mist",
+          "point_kr": "스킨케어 라인 미스트"
+        }
+      ],
+      "desc_kr": "메이크업 아티스트 박상은 기획 색조 브랜드. 섀도우·애교살·블러셔·립 겸용 파스텔 펜슬",
+      "strengths_kr": [
+        "눈·볼·입술 겸용 멀티 펜슬",
+        "부서지지 않는 부드러운 제형(판매처 설명)",
+        "피치·핑크 파스텔 브랜드 아이덴티티"
+      ],
+      "category_focus": "Makeup",
+      "confidence": "medium"
+    },
+    {
+      "id": "tambeauty",
+      "name": "TAM BEAUTY",
+      "kr": "탐뷰티",
+      "listed_products": 60,
+      "thumb": "thumbs/tambeauty.webp",
+      "thumb_source": "catalog image key 7b3f092af5dc",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "The Jelly Plumping Lip Oil",
+        "kr": "더 젤리 플럼핑 립 오일"
+      },
+      "tagline_en": "Jelly-texture lip oils, glosses and cushions",
+      "desc_en": "TAM BEAUTY makes jelly-texture lip oils, glosses, tints and cushions with a juicy, glossy finish.",
+      "strengths_en": [
+        "Jelly Plumping Lip Oil: high-shine, cooling, non-sticky (vegan)",
+        "Wide lip tint range in fruit-named shades",
+        "Jelly Skin Cushion and Cloud concealer for base makeup"
+      ],
+      "hero_products": [
+        {
+          "en": "The Jelly Plumping Lip Oil",
+          "kr": "더 젤리 플럼핑 립 오일",
+          "point_en": "Glossy lip oil with a cooling plumping feel",
+          "point_kr": "쿨링감 있는 광택 립오일"
+        },
+        {
+          "en": "The Jelly Plumping Lip Tint",
+          "kr": "더 젤리 플럼핑 립 틴트",
+          "point_en": "8 fruit shades",
+          "point_kr": "과일 컬러 8종"
+        },
+        {
+          "en": "The Jelly Skin Cushion",
+          "kr": "더 젤리 스킨 쿠션",
+          "point_en": "Dewy cushion foundation in 4 shades",
+          "point_kr": "촉촉한 쿠션, 4가지 호수"
+        }
+      ],
+      "desc_kr": "젤리 제형 립오일·글로스·틴트·쿠션 브랜드. 촉촉한 광택 마무리",
+      "strengths_kr": [
+        "젤리 플럼핑 립오일: 고광택·쿨링·끈적임 없음(비건, 판매처 기재)",
+        "과일 이름 컬러의 다양한 립틴트",
+        "젤리 스킨 쿠션·클라우드 컨실러 베이스 라인"
+      ],
+      "category_focus": "Makeup",
+      "confidence": "medium"
+    },
+    {
+      "id": "toocoolforschool",
+      "name": "too cool for school",
+      "kr": "투쿨포스쿨",
+      "listed_products": 0,
+      "thumb": "thumbs/toocoolforschool.webp",
+      "thumb_source": "too cool for school official store",
+      "image_status": "ok",
+      "image_note": "",
+      "hero_product": {
+        "en": "Artclass By Rodin Shading",
+        "kr": "아트클래스 바이로댕 쉐딩"
+      },
+      "tagline_en": "Art-driven Seoul makeup since 2009",
+      "desc_en": "too cool for school is a Seoul makeup brand launched in 2009 with art-inspired, vintage-illustration packaging. Its Artclass By Rodin Shading is a signature three-tone contour palette.",
+      "strengths_en": [
+        "Three-tone contour that blends or works shade by shade",
+        "Retro art packaging that stands out on shelf",
+        "Over 11M units sold in Japan (2015-2024)"
+      ],
+      "hero_products": [
+        {
+          "en": "Artclass By Rodin Shading",
+          "kr": "아트클래스 바이로댕 쉐딩",
+          "point_en": "Signature 3-tone contour palette",
+          "point_kr": "시그니처 3색 컨투어"
+        },
+        {
+          "en": "Artclass Smudging Under Liner",
+          "kr": "아트클래스 스머징 언더라이너",
+          "point_en": "Slim pencil with blending brush",
+          "point_kr": "블렌딩 브러시 일체형 슬림 펜슬"
+        },
+        {
+          "en": "Egg Mousse Pack",
+          "kr": "에그 무스 팩",
+          "point_en": "Signature egg skincare",
+          "point_kr": "시그니처 에그 스킨케어"
+        }
+      ],
+      "desc_kr": "2009년 론칭 아트 콘셉트 색조 브랜드. 대표 아트클래스 바이로댕 쉐딩(3색 컨투어)",
+      "strengths_kr": [
+        "블렌딩·단독 사용 가능한 3색 쉐딩",
+        "매대에서 눈에 띄는 레트로 아트 패키지",
+        "일본 누적 1,100만 개 판매(브랜드 발표, 2015~2024)"
+      ],
+      "category_focus": "Makeup",
+      "confidence": "high"
+    },
+    {
+      "id": "touchinsol",
+      "name": "Touch in Sol",
+      "kr": "터치인솔",
+      "listed_products": 0,
+      "thumb": "thumbs/touchinsol.webp",
+      "thumb_source": "Touch in Sol official store",
+      "image_status": "ok",
+      "image_note": "라벤더 배경 제거",
+      "hero_product": {
+        "en": "No Poreblem Primer Prep",
+        "kr": "노포어블럼 프라이머 프렙"
+      },
+      "tagline_en": "Base makeup led by a pore-blurring primer",
+      "desc_en": "Touch in Sol is a base-makeup brand (since 2012). Led by the No Poreblem Primer Prep, it entered Olive Young in 2026 and already sells via Amazon US, Qoo10 and Don Quijote.",
+      "strengths_en": [
+        "Primer for oily, pore-prone skin with a smooth, non-greasy finish",
+        "Layered base routine: primer, foundation, cushion",
+        "Existing channels: Amazon US, Qoo10, Don Quijote"
+      ],
+      "hero_products": [
+        {
+          "en": "No Poreblem Primer Prep",
+          "kr": "노포어블럼 프라이머 프렙",
+          "point_en": "Pore and shine control primer",
+          "point_kr": "모공·번들거림 프라이머"
+        },
+        {
+          "en": "Glow Base Prep",
+          "kr": "글로우 베이스 프렙",
+          "point_en": "Hydrating prep with pearl glow",
+          "point_kr": "은은한 진주 윤광 프렙"
+        },
+        {
+          "en": "Cool Wear Matte Cushion",
+          "kr": "쿨웨어 매트 쿠션",
+          "point_en": "Matte cushion",
+          "point_kr": "매트 쿠션"
+        }
+      ],
+      "desc_kr": "2012년부터 전개한 베이스 메이크업 브랜드. 노포어블럼 프라이머 주력, 2026년 올리브영 입점, 아마존·큐텐·돈키호테 유통",
+      "strengths_kr": [
+        "지성·모공 피부용 보송한 프라이머",
+        "프라이머·파운데이션·쿠션 레이어드 베이스 루틴",
+        "아마존 US·큐텐·돈키호테 유통 경험"
+      ],
+      "category_focus": "Makeup (Base)",
+      "confidence": "high"
+    }
+  ]
+}
