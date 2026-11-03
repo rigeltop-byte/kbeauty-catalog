@@ -1,0 +1,7 @@
+# Internal source files must never be committed
+*.xlsx
+*.xls
+*.csv
+source/
+build/
+.DS_Store
