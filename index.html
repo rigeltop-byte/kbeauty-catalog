@@ -103,6 +103,8 @@ button { cursor: pointer; }
 .fitem[aria-pressed="true"] { background: var(--ink); color: #fff; }
 .fitem[aria-pressed="true"] .fk, .fitem[aria-pressed="true"] .fc { color: rgba(255, 255, 255, .7); }
 .fitem.all { font-weight: 600; }
+.fhead { font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); padding: 12px 10px 4px; }
+.fhead:first-child { padding-top: 2px; }
 .rail-note { padding: 14px 16px; border-radius: var(--r-md); background: var(--accent-soft); font-size: 13px; line-height: 1.45; color: var(--ink-2); }
 .rail-note b { display: block; color: var(--ink); margin-bottom: 2px; }
 
@@ -118,6 +120,14 @@ button { cursor: pointer; }
 .pill.warn { background: var(--accent-soft); color: var(--accent); }
 .pill.ok { background: var(--ok-soft); color: var(--ok); }
 .req-cats { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+
+/* Product group tabs (Skincare / Makeup / Hair & Body ...) */
+.groups { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.gtab { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--line-strong); background: var(--surface); border-radius: 999px; padding: 8px 14px; font-size: 13.5px; font-weight: 500; color: var(--ink-2); white-space: nowrap; transition: background .12s ease, color .12s ease; }
+.gtab:hover { background: var(--well); }
+.gtab .n { font-size: 12px; color: var(--faint); }
+.gtab[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.gtab[aria-pressed="true"] .n { color: rgba(255, 255, 255, .7); }
 
 .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
 .count { margin: 0; font-size: 14px; color: var(--muted); }
@@ -137,6 +147,7 @@ button { cursor: pointer; }
 .card:hover .well img { transform: scale(1.04); }
 .card .well .noimg { font-family: var(--serif); font-size: 18px; color: var(--faint); text-align: center; padding: 12px; letter-spacing: -.01em; }
 .card .cat { position: absolute; top: 10px; left: 10px; font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: rgba(255, 255, 255, .85); padding: 4px 8px; border-radius: 999px; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.card .rep { position: absolute; left: 10px; bottom: 10px; font-size: 10px; font-weight: 500; letter-spacing: .04em; color: var(--faint); background: rgba(255, 255, 255, .85); padding: 3px 7px; border-radius: 999px; }
 .card .body { padding: 12px 2px 0; display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
 .card .brand { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .card h3 { margin: 0; font-size: 14.5px; font-weight: 500; line-height: 1.35; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -203,6 +214,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 
 /* Tablet / mobile */
 @media (max-width: 960px) {
+  .groups { display: none; }
   .layout { grid-template-columns: 1fr; gap: 0; padding-block: 20px 64px; }
   .rail { display: none; }
   .chips { display: grid; gap: 10px; margin-bottom: 18px; }
@@ -280,7 +292,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       <div class="flist" id="brandList"></div>
     </div>
     <div class="rail-group">
-      <h2>Categories</h2>
+      <h2>Categories <span id="railCatNote"></span></h2>
       <div class="flist" id="catList"></div>
     </div>
     <div class="rail-note"><b>Looking for another brand?</b>We source more Korean skincare, makeup and hair brands. Add a note to your inquiry.</div>
@@ -289,9 +301,11 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   <section class="content">
     <div class="chips" aria-label="Filters">
       <div><p class="chip-lbl">Brands</p><div class="chip-row" id="brandChips"></div></div>
+      <div><p class="chip-lbl">Type</p><div class="chip-row" id="groupChips"></div></div>
       <div><p class="chip-lbl">Categories</p><div class="chip-row" id="catChips"></div></div>
     </div>
     <div id="brandPanel" hidden></div>
+    <div class="groups" id="groups" aria-label="Product groups"></div>
     <div class="toolbar">
       <p class="count" id="count">Loading catalog&hellip;</p>
       <label class="sort" for="sort">Sort
@@ -341,7 +355,8 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 <script>
 (function () {
   const $ = (s) => document.querySelector(s);
-  const state = { brand: null, cat: 'All', q: '', sort: 'brand', shown: 48, inq: [] };
+  const state = { brand: null, group: 'All', cat: 'All', q: '', sort: 'brand', shown: 48, inq: [] };
+  const GROUP_LABEL = { 'Devices & Tools': 'Devices', 'Sets & More': 'Sets & more' };
   let DATA = null, BRANDS = {}, IMG = {};
   const PAGE = 48;
   const KEEP = new Set(['PDRN','SPF','PA','AHA','BHA','PHA','EGF','NAD','TXA','UV','CICA','LHA','NMN','AGE-R','KR','US','EU','MTS','PH','II','III','EX','HA','PRO','X2','N','B5','C','A','E','K','BB','CC','TECA','LED','EMS','HCT','H.C.T.']);
@@ -371,7 +386,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 
   function filtered() {
     const q = state.q.trim().toLowerCase();
-    let list = DATA.products.filter((p) => (!state.brand || p.b === state.brand) && (state.cat === 'All' || p.c === state.cat));
+    let list = DATA.products.filter((p) => (!state.brand || p.b === state.brand) && (state.group === 'All' || p.g === state.group) && (state.cat === 'All' || p.c === state.cat));
     if (q) {
       const terms = q.split(/\s+/);
       list = list.filter((p) => { const hay = p._s; return terms.every((t) => hay.includes(t)); });
@@ -423,16 +438,41 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     el.hidden = false;
   }
 
-  function renderCats() {
+  function renderGroups() {
     const base = DATA.products.filter((p) => !state.brand || p.b === state.brand);
     const counts = {};
-    base.forEach((p) => { counts[p.c] = (counts[p.c] || 0) + 1; });
-    const order = Object.keys(counts).sort((a, b) => (a === 'Other') - (b === 'Other') || counts[b] - counts[a]);
+    base.forEach((p) => { counts[p.g] = (counts[p.g] || 0) + 1; });
+    if (state.group !== 'All' && !counts[state.group]) state.group = 'All';
+    const tab = (g, n, label) => `<button class="gtab" type="button" data-group="${esc(g)}" aria-pressed="${state.group === g}">${esc(label || GROUP_LABEL[g] || g)}<span class="n num">${n}</span></button>`;
+    const groups = (DATA.groups || []).filter((g) => counts[g]);
+    $('#groups').innerHTML = base.length ? tab('All', base.length, 'All products') + groups.map((g) => tab(g, counts[g])).join('') : '';
+    $('#groups').hidden = !base.length;
+    const gchip = (g, n, label) => `<button class="chip" type="button" data-group="${esc(g)}" aria-pressed="${state.group === g}">${esc(label || GROUP_LABEL[g] || g)}<span class="n">${n}</span></button>`;
+    $('#groupChips').innerHTML = base.length ? gchip('All', base.length, 'All') + groups.map((g) => gchip(g, counts[g])).join('') : '';
+  }
+
+  function renderCats() {
+    const base = DATA.products.filter((p) => (!state.brand || p.b === state.brand) && (state.group === 'All' || p.g === state.group));
+    const counts = {}, groupOf = {};
+    base.forEach((p) => { counts[p.c] = (counts[p.c] || 0) + 1; groupOf[p.c] = p.g; });
     if (state.cat !== 'All' && !counts[state.cat]) state.cat = 'All';
+    const groups = (DATA.groups || []).filter((g) => Object.keys(counts).some((c) => groupOf[c] === g));
+    const catsIn = (g) => Object.keys(counts).filter((c) => groupOf[c] === g).sort((a, b) => (a === 'Other') - (b === 'Other') || counts[b] - counts[a]);
     const item = (c, n, label) => `<button class="fitem${c === 'All' ? ' all' : ''}" type="button" data-cat="${esc(c)}" aria-pressed="${state.cat === c}"><span class="fn">${esc(label || c)}</span><span class="fc num">${n}</span></button>`;
     const chip = (c, n, label) => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${state.cat === c}">${esc(label || c)}<span class="n">${n}</span></button>`;
-    $('#catList').innerHTML = base.length ? item('All', base.length, 'All categories') + order.map((c) => item(c, counts[c])).join('') : '<p class="count">No product list yet.</p>';
-    $('#catChips').innerHTML = base.length ? chip('All', base.length, 'All') + order.map((c) => chip(c, counts[c])).join('') : '';
+    const allLabel = state.group === 'All' ? 'All categories' : 'All ' + (GROUP_LABEL[state.group] || state.group).toLowerCase();
+    let rail = '';
+    if (base.length) {
+      rail = item('All', base.length, allLabel);
+      groups.forEach((g) => {
+        const cats = catsIn(g);
+        if (state.group === 'All' && groups.length > 1 && !(cats.length === 1 && cats[0] === g)) rail += `<div class="fhead">${esc(GROUP_LABEL[g] || g)}</div>`;
+        rail += cats.map((c) => item(c, counts[c])).join('');
+      });
+    }
+    $('#catList').innerHTML = rail || '<p class="count">No product list yet.</p>';
+    $('#railCatNote').textContent = state.group === 'All' ? '' : (GROUP_LABEL[state.group] || state.group);
+    $('#catChips').innerHTML = base.length ? chip('All', base.length, 'All') + groups.flatMap(catsIn).map((c) => chip(c, counts[c])).join('') : '';
   }
 
   function card(p) {
@@ -440,7 +480,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     const added = state.inq.some((x) => x.t === 'p' && x.id === p.id);
     const img = p.i && IMG[p.i] ? `<img src="${IMG[p.i]}" alt="" loading="lazy" decoding="async">` : `<span class="noimg">${esc(b.name)}</span>`;
     return `<article class="card">
-      <div class="well">${img}<span class="cat">${esc(p.c)}</span></div>
+      <div class="well">${img}<span class="cat">${esc(p.c)}</span>${p.ir && p.i && IMG[p.i] ? '<span class="rep">Representative photo</span>' : ''}</div>
       <div class="body">
         <div class="brand">${esc(b.name)}</div>
         <h3>${esc(p.nn)}</h3>
@@ -461,7 +501,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       $('#more').hidden = true;
       return;
     }
-    const where = (b ? ' in ' + esc(b.name) : '') + (state.cat !== 'All' ? ' · ' + esc(state.cat) : '');
+    const where = (b ? ' in ' + esc(b.name) : '') + (state.group !== 'All' ? ' · ' + esc(GROUP_LABEL[state.group] || state.group) : '') + (state.cat !== 'All' ? ' · ' + esc(state.cat) : '');
     $('#count').innerHTML = `<b>${list.length.toLocaleString('en-US')}</b> product${list.length === 1 ? '' : 's'}${where}${state.q ? ` matching &ldquo;${esc(state.q.trim())}&rdquo;` : ''}`;
     if (!list.length) {
       g.innerHTML = `<div class="empty" style="grid-column:1/-1"><b>No products match</b>Try another search or clear the filters.</div>`;
@@ -472,7 +512,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     $('#more').textContent = `Show more (${list.length - state.shown} left)`;
   }
 
-  function renderAll() { renderBrands(); renderPanel(); renderCats(); renderGrid(); }
+  function renderAll() { renderBrands(); renderPanel(); renderGroups(); renderCats(); renderGrid(); }
 
   function setBrand(id) {
     state.brand = id || null;
@@ -542,6 +582,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   document.addEventListener('click', (e) => {
     const t = e.target.closest('button'); if (!t) return;
     if (t.dataset.brand !== undefined) setBrand(t.dataset.brand);
+    else if (t.dataset.group) { state.group = t.dataset.group; state.cat = 'All'; state.shown = PAGE; renderGroups(); renderCats(); renderGrid(); }
     else if (t.dataset.cat) { state.cat = t.dataset.cat; state.shown = PAGE; renderCats(); renderGrid(); }
     else if (t.dataset.add) toggleProduct(t.dataset.add);
     else if (t.dataset.brandReq) toggleBrandReq(t.dataset.brandReq);
@@ -579,7 +620,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     d.products.forEach((p, i) => {
       p.id = p.b + '-' + i;
       p.nn = prettify(p.n);
-      p._s = (p.n + ' ' + p.k + ' ' + p.c + ' ' + p.l + ' ' + BRANDS[p.b].name + ' ' + BRANDS[p.b].kr).toLowerCase();
+      p._s = (p.n + ' ' + p.k + ' ' + p.c + ' ' + (p.g || '') + ' ' + p.l + ' ' + BRANDS[p.b].name + ' ' + BRANDS[p.b].kr).toLowerCase();
       d.byId[p.id] = p;
     });
     if (matchMedia('(max-width: 640px)').matches) $('#q').placeholder = 'Search';

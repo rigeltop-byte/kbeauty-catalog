@@ -29,7 +29,8 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 브랜드 홈페이지 링크 (바이어가 브랜드사에 직접 연락하는 것을 막기 위해 의도적으로 뺐음)
 
 현재 catalog.json의 필드:
-- 제품: `b` 브랜드ID, `c` 카테고리, `l` 원본 라인명, `n` 영문명, `k` 국문명, `v` 용량, `p` 소비자가(MSRP, USD), `i` 이미지 키
+- 제품: `b` 브랜드ID, `g` 그룹(Skincare / Makeup / Hair & Body / Devices & Tools / Sets & More), `c` 카테고리(메이크업은 Lip / Eye & Brow / Face & Cheek로 세분), `l` 원본 라인명, `n` 영문명, `k` 국문명, `v` 용량, `p` 소비자가(MSRP, USD), `i` 이미지 키, `ir` 1이면 같은 제품의 다른 용량·향 사진을 대신 쓴 것(카드에 "Representative photo" 표시)
+- 최상위: `groups` 그룹 순서 배열
 - 브랜드: `id, name, kr, desc, count, cats, note(판매 제한), nmpa(중국 등록)`
 커밋 전 확인: `grep -ri "supply\|fob\|moq\|barcode" data/` 결과가 비어 있어야 한다.
 
@@ -39,6 +40,23 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 단가표가 없는 14개 브랜드: "List on request" + 제품 목록 요청 버튼.
 - 회사명·연락처 미정 → 상단 로고는 임시로 "K-Beauty Trade Catalog". 정해지면 `.mark`, `<title>`, 문의 안내 문구, 복사 텍스트 첫 줄(`inquiryText()`)을 교체.
 - `<meta name="robots" content="noindex">`로 검색엔진 노출을 막아 두었다 (링크 받은 바이어만 보도록). 공개 홍보용으로 바꿀 때 제거.
+
+## 이미지·분류 파이프라인 (2026-11-03 개편)
+썸네일은 `tools/make_thumbs.py`(혼합 방식)로 만든다. 흰 배경은 자르기만 하고, 회색·분홍 단색 배경은 macOS Vision 누끼(`tools/cutout.swift`)가 제품 범위와 맞을 때만 쓰며, 아니면 좁은 허용치로 배경색만 지운다. 사진 배경은 Vision 누끼를 쓴다.
+1. 원본 추출: 엑셀 `xl/media/*`를 md5[:12] 키로 `build/orig/<key>.<ext>`에 저장 (카탈로그의 이미지 키와 같다)
+2. `swiftc -O -o cutout tools/cutout.swift && ./cutout build/cut build/orig/*` (맥 전용, 674장 30초)
+3. `python3 tools/make_thumbs.py --orig build/orig --cut build/cut --out build/thumbs --review build/review` → 리뷰 시트 `sheet_<방식>.jpg`로 눈 검수
+4. `python3 tools/apply_images.py --catalog data/catalog.json --thumbs build/thumbs --extra build/extra` → 썸네일 교체, 공식 사진 추가(`extra.json` 매핑), 형제 제품 사진 대체(`ir`), `tools/enrich.py`로 그룹·세부 분류 부여
+- 시스템 파이썬(`/usr/bin/python3`, Pillow·numpy·openpyxl 있음)으로 돌린다. Homebrew 파이썬에는 패키지가 없다.
+- 공식 사진 출처: medicube.us, celimax.us, celimax.com 제품 페이지의 대표 이미지 7장(PDRN Hydrating UV Serum, 3H Drying Lotion, Rosemary PDRN Hair Mask, Ji Woo Gae One Step Mild Cleansing Pad, Baking Soda Deep Pore Foam, Vita-A Retinal Shot Dual Cream, Noni Calming Glow Pad).
+- 아직 사진이 없는 제품: medicube SOS Invisible Patch 36pcs 1개(공식 사이트에 없음).
+- Vision 누끼가 모델 얼굴·손만 남긴 사진이 소수 있다(원본이 연출 사진인 경우). 눈에 띄면 해당 키를 `build/orig`에서 바꿔 다시 돌린다.
+
+## 바이어 탐색 구조 (2026-11-03)
+- 브랜드 레일(좌측) → 그룹 탭(All / Skincare / Makeup / Hair & Body / Devices / Sets & more, 수량 표시) → 그룹별 세부 분류(레일 "Categories"가 그룹 머리글로 묶여 보이고, 그룹을 고르면 그 그룹의 분류만 남음) → 검색·정렬.
+- 모바일(≤960px)은 그룹 탭이 가로 스크롤, 분류는 칩 두 줄.
+- 분류 규칙은 `tools/enrich.py`의 `GROUP`·`MAKEUP` 표. 새 분류가 생기면 거기에 한 줄 추가.
+- 이름에 "사용중지"·"단종"이 붙은 제품은 `enrich.py`가 카탈로그에서 뺀다(2026-11-03 기준 메디큐브 PDRN 펩타이드 글로시 립 밤 1개). (KR)/(US) 표시는 기기 전압 규격 차이라 그대로 둔다.
 
 ## 데이터 갱신 (새 가격표가 오면)
 `tools/` 스크립트는 claude.ai 세션에서 쓰던 그대로라 **경로를 로컬에 맞게 고쳐야 한다**. 원본 엑셀은 저장소 밖(예: `../source/`)에 두고 돌린다.
