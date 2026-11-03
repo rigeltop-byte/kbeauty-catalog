@@ -81,3 +81,12 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 문의 드로어: 항목별 수량 −/+ 스테퍼, "Your details" 폼, 복사 버튼(장미색).
 - 로컬 확인: `.claude/launch.json`의 `kbeauty-catalog`(포트 8810) 또는 `python3 -m http.server 8810 --directory kbeauty-catalog`.
 - 회사명이 정해지면 바꿀 곳: `.mark .name`, `<title>`, `footer .fm`, `inquiryText()` 첫 줄.
+
+## 다음 작업: 브랜드 섬네일 + 특장점 카드 (2026-11-03, Aside 조사)
+대표님 요청: 브랜드별로 섬네일 이미지 1장과 간략한 제품 특장점을 사이트에 넣기.
+- 작업 지시서: `handoff/brand-highlights/README.md` (먼저 읽기)
+- 데이터: `handoff/brand-highlights/brand_highlights.json` — 25개 브랜드의 tagline, 소개, 특장점 3개, 대표 제품 2~3개(영문 바이어용 + 국문 검수용)
+- 섬네일: `handoff/brand-highlights/thumbs/<브랜드id>.webp` 25장 (480px 정사각 흰 배경, 기존 제품 썸네일 규격)
+- 핵심: 제품 0개인 "On request" 14개 브랜드도 소개 카드가 생기도록. 브랜드를 고르면 그리드 위에 소개 카드 표시
+- 이미지 교체 대기: charde(구 패키지), eiom(마케팅 이미지), phytos(저해상도), piciberry(작은 원본)
+- 수치·수상 문구는 브랜드사 발표·보도 기준. 지어내지 말고, 출처 URL·브랜드 홈페이지 링크는 넣지 않는다
