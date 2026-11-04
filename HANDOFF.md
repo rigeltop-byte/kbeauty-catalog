@@ -50,7 +50,7 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 시스템 파이썬(`/usr/bin/python3`, Pillow·numpy·openpyxl 있음)으로 돌린다. Homebrew 파이썬에는 패키지가 없다.
 - 공식 사진 출처: medicube.us, celimax.us, celimax.com 제품 페이지의 대표 이미지 7장(PDRN Hydrating UV Serum, 3H Drying Lotion, Rosemary PDRN Hair Mask, Ji Woo Gae One Step Mild Cleansing Pad, Baking Soda Deep Pore Foam, Vita-A Retinal Shot Dual Cream, Noni Calming Glow Pad).
 - 아직 사진이 없는 제품: medicube SOS Invisible Patch 36pcs 1개(공식 사이트에 없음).
-- Vision 누끼가 모델 얼굴·손만 남긴 사진이 소수 있다(원본이 연출 사진인 경우). 눈에 띄면 해당 키를 `build/orig`에서 바꿔 다시 돌린다.
+- 누끼가 제품을 잘라먹은 61장(마스크팩 봉지, 펌프·뚜껑만 남은 병, 키치캐치 팔레트 등)은 `tools/thumb_overrides.json`에 키를 적어 두어 '안전 모드'(배경 제거 없이 자르기만, 배경색 캔버스)로 만든다(2026-11-04). 새로 잘린 게 보이면 그 키를 이 파일에 추가하고 다시 돌린다. 대체 사진(브랜드 공식 흰 배경 컷)이 오면 `build/orig`의 원본을 바꾸고 목록에서 뺀다.
 
 ## 바이어 탐색 구조 (2026-11-03)
 - 브랜드 레일(좌측) → 그룹 탭(All / Skincare / Makeup / Hair & Body / Devices / Sets & more, 수량 표시) → 그룹별 세부 분류(레일 "Categories"가 그룹 머리글로 묶여 보이고, 그룹을 고르면 그 그룹의 분류만 남음) → 검색·정렬.

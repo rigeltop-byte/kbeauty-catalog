@@ -6,6 +6,7 @@
 
 Vision cutouts come from tools/cutout.swift (compile: swiftc -O -o cutout tools/cutout.swift; run: ./cutout <cut_dir> <orig>...).
 Usage: python3 tools/make_thumbs.py --orig build/orig --cut build/cut --out build/thumbs [--review build/review]
+tools/thumb_overrides.json lists image keys that must use 'safe' (trim only): the cutout cut those products.
 Originals are named <imagekey>.<ext>; the image key is md5(file bytes)[:12], the same key catalog.json uses.
 """
 import argparse, json, os
@@ -65,11 +66,22 @@ def place(img, bbox, canvas=(255, 255, 255)):
 
 def area(b): return (b[2] - b[0]) * (b[3] - b[1]) if b else 0
 
-def thumb(orig_path, cut_path=None):
-    """Return (PIL RGB 480x480, method)."""
+def safe_bbox(mask):
+    """bbox that never cuts the product: 3px speck erosion only, no projection threshold."""
+    if not mask.any(): return None
+    er = np.asarray(Image.fromarray((mask.astype(np.uint8) * 255)).filter(ImageFilter.MinFilter(3))) > 0
+    m = er if er.any() else mask
+    rows = np.where(m.any(axis=1))[0]; cols = np.where(m.any(axis=0))[0]; h, w = m.shape; pad = 5
+    return (max(0, cols[0] - pad), max(0, rows[0] - pad), min(w, cols[-1] + 1 + pad), min(h, rows[-1] + 1 + pad))
+
+def thumb(orig_path, cut_path=None, mode=None):
+    """Return (PIL RGB 480x480, method). mode='safe' = trim only, nothing removed (for images the cutout would cut)."""
     im = shrink(to_rgb(Image.open(orig_path)))
     a = np.asarray(im).astype(np.int16)
     bg, uni = border_stats(a)
+    if mode == 'safe':
+        canvas = (255, 255, 255) if bg.min() >= 238 else bg
+        return place(im, safe_bbox(np.abs(a - bg).max(axis=2) > 24), canvas), 'safe'
     dbox = robust_bbox(np.abs(a - bg).max(axis=2) > 24)
     vis = None
     if cut_path and os.path.exists(cut_path):
@@ -92,11 +104,14 @@ def thumb(orig_path, cut_path=None):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('--orig', required=True); ap.add_argument('--cut', default=None)
-    ap.add_argument('--out', required=True); ap.add_argument('--review', default=None); a = ap.parse_args()
+    ap.add_argument('--out', required=True); ap.add_argument('--review', default=None)
+    ap.add_argument('--overrides', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'thumb_overrides.json'), help='JSON {imagekey: "safe"}')
+    a = ap.parse_args()
+    ov = json.load(open(a.overrides)) if a.overrides and os.path.exists(a.overrides) else {}
     os.makedirs(a.out, exist_ok=True); method = {}
     for f in sorted(os.listdir(a.orig)):
         k = f.rsplit('.', 1)[0]
-        out, method[k] = thumb(os.path.join(a.orig, f), os.path.join(a.cut, k + '.png') if a.cut else None)
+        out, method[k] = thumb(os.path.join(a.orig, f), os.path.join(a.cut, k + '.png') if a.cut else None, ov.get(k))
         out.save(os.path.join(a.out, k + '.webp'), 'WEBP', quality=74, method=6)
     from collections import Counter
     print(Counter(method.values()))
