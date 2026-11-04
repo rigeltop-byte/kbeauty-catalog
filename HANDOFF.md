@@ -31,7 +31,7 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 현재 catalog.json의 필드:
 - 제품: `b` 브랜드ID, `g` 그룹(Skincare / Makeup / Hair & Body / Devices & Tools / Sets & More), `c` 카테고리(메이크업은 Lip / Eye & Brow / Face & Cheek로 세분), `l` 원본 라인명, `n` 영문명, `k` 국문명, `v` 용량, `p` 소비자가(MSRP, USD), `i` 이미지 키, `ir` 1이면 같은 제품의 다른 용량·향 사진을 대신 쓴 것(카드에 "Representative photo" 표시)
 - 최상위: `groups` 그룹 순서 배열
-- 브랜드: `id, name, kr, desc, count, cats, note(판매 제한), nmpa(중국 등록)`
+- 브랜드: `id, name, kr, desc, count, cats, note(판매 제한), nmpa(중국 등록)` + 특장점 카드용 `thumb`(이미지 키), `tagline`, `strengths`(3줄), `heroes`([{n, note}] 대표 제품), `focus`
 커밋 전 확인: `grep -ri "supply\|fob\|moq\|barcode" data/` 결과가 비어 있어야 한다.
 
 ## 표시 정책 (대표님 확인 사항)
@@ -90,3 +90,10 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 핵심: 제품 0개인 "On request" 14개 브랜드도 소개 카드가 생기도록. 브랜드를 고르면 그리드 위에 소개 카드 표시
 - 이미지 교체 대기: charde(구 패키지), eiom(마케팅 이미지), phytos(저해상도), piciberry(작은 원본)
 - 수치·수상 문구는 브랜드사 발표·보도 기준. 지어내지 말고, 출처 URL·브랜드 홈페이지 링크는 넣지 않는다
+
+### 반영 결과 (2026-11-04, Claude Code)
+- `tools/apply_brands.py --catalog data/catalog.json --highlights handoff/brand-highlights`가 25개 브랜드를 병합한다. 제품이 있는 11개는 기존 이미지 키를 `thumb`로 쓰고, On request 14개는 `thumbs/<id>.webp`를 data URI로 `images`에 넣는다(키 = md5[:12]). `*_kr`·`confidence`·`image_status`·`thumb_source`는 사이트 JSON에 넣지 않는다.
+- 화면: 브랜드를 고르면 그리드 위 소개 카드(썸네일 · 분야/제품 수 · 브랜드명 · tagline · 소개 · 특장점 3개 · 대표 제품 칩). 제품이 있는 브랜드는 대표 제품 칩을 누르면 그 이름으로 검색된다. On request 브랜드는 카드 + "Request product list"가 본문이다. ≤960px 두 열, ≤640px 한 열.
+- 브랜드 데이터가 바뀌면 `brand_highlights.json`을 고치고 위 스크립트를 다시 돌린 뒤 커밋.
+- 이미지 교체 대기(charde·eiom·phytos·piciberry)와 lowlize(누끼 거침)는 새 사진이 오면 `thumbs/<id>.webp`만 바꾸고 다시 돌린다.
+- (선택) 25개 브랜드 카드 그리드("Brands" 섹션)는 아직 안 했다.
