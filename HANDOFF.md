@@ -84,7 +84,7 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 
 ## 다음 작업: 브랜드 섬네일 + 특장점 카드 (2026-11-03, Aside 조사)
 대표님 요청: 브랜드별로 섬네일 이미지 1장과 간략한 제품 특장점을 사이트에 넣기.
-- 작업 지시서: `handoff/brand-highlights/README.md` (먼저 읽기)
+- 작업 지시서: `handoff/brand-highlights/README.md` (먼저 읽기). **이 폴더는 시하기획-OS에만 있고 공개 저장소에는 올리지 않는다**(국문 검수 메모·신뢰도·이미지 출처 포함). 공개 저장소로 동기화할 때 `--exclude 'handoff/'`.
 - 데이터: `handoff/brand-highlights/brand_highlights.json` — 25개 브랜드의 tagline, 소개, 특장점 3개, 대표 제품 2~3개(영문 바이어용 + 국문 검수용)
 - 섬네일: `handoff/brand-highlights/thumbs/<브랜드id>.webp` 25장 (480px 정사각 흰 배경, 기존 제품 썸네일 규격)
 - 핵심: 제품 0개인 "On request" 14개 브랜드도 소개 카드가 생기도록. 브랜드를 고르면 그리드 위에 소개 카드 표시
