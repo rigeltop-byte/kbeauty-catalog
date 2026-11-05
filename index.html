@@ -377,7 +377,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 (function () {
   const $ = (s) => document.querySelector(s);
   const state = { brand: null, group: 'All', cat: 'All', q: '', sort: 'brand', shown: 48, inq: [] };
-  const GROUP_LABEL = { 'Devices & Tools': 'Devices', 'Sets & More': 'Sets & more' };
+  const GROUP_LABEL = { 'Sets & More': 'Sets & more' };
   let DATA = null, BRANDS = {}, IMG = {};
   const PAGE = 48;
   const KEEP = new Set(['PDRN','SPF','PA','AHA','BHA','PHA','EGF','NAD','TXA','UV','CICA','LHA','NMN','AGE-R','KR','US','EU','MTS','PH','II','III','EX','HA','PRO','X2','N','B5','C','A','E','K','BB','CC','TECA','LED','EMS','HCT','H.C.T.']);
@@ -488,7 +488,9 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     base.forEach((p) => { counts[p.c] = (counts[p.c] || 0) + 1; groupOf[p.c] = p.g; });
     if (state.cat !== 'All' && !counts[state.cat]) state.cat = 'All';
     const groups = (DATA.groups || []).filter((g) => Object.keys(counts).some((c) => groupOf[c] === g));
-    const catsIn = (g) => Object.keys(counts).filter((c) => groupOf[c] === g).sort((a, b) => (a === 'Other') - (b === 'Other') || counts[b] - counts[a]);
+    const ORDER = DATA.catOrder || [];
+    const rank = (c) => { const i = ORDER.indexOf(c); return i < 0 ? 999 : i; };
+    const catsIn = (g) => Object.keys(counts).filter((c) => groupOf[c] === g).sort((a, b) => rank(a) - rank(b) || counts[b] - counts[a]);
     const item = (c, n, label) => `<button class="fitem${c === 'All' ? ' all' : ''}" type="button" data-cat="${esc(c)}" aria-pressed="${state.cat === c}"><span class="fn">${esc(label || c)}</span><span class="fc num">${n}</span></button>`;
     const chip = (c, n, label) => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${state.cat === c}">${esc(label || c)}<span class="n">${n}</span></button>`;
     const allLabel = state.group === 'All' ? 'All categories' : 'All ' + (GROUP_LABEL[state.group] || state.group).toLowerCase();

@@ -29,7 +29,7 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 브랜드 홈페이지 링크 (바이어가 브랜드사에 직접 연락하는 것을 막기 위해 의도적으로 뺐음)
 
 현재 catalog.json의 필드:
-- 제품: `b` 브랜드ID, `g` 그룹(Skincare / Makeup / Hair & Body / Devices & Tools / Sets & More), `c` 카테고리(메이크업은 Lip / Eye & Brow / Face & Cheek로 세분), `l` 원본 라인명, `n` 영문명, `k` 국문명, `v` 용량, `p` 소비자가(MSRP, USD), `i` 이미지 키, `ir` 1이면 같은 제품의 다른 용량·향 사진을 대신 쓴 것(카드에 "Representative photo" 표시)
+- 제품: `b` 브랜드ID, `g` 그룹(Skincare / Makeup / Hair & Body / Sets & More), `c` 카테고리(아래 「카테고리 체계」 참고), `l` 원본 라인명, `n` 영문명, `k` 국문명, `v` 용량, `p` 소비자가(MSRP, USD), `i` 이미지 키, `ir` 1이면 같은 제품의 다른 용량·향 사진을 대신 쓴 것(카드에 "Representative photo" 표시)
 - 최상위: `groups` 그룹 순서 배열
 - 브랜드: `id, name, kr, desc, count, cats, note(판매 제한), nmpa(중국 등록)` + 특장점 카드용 `thumb`(이미지 키), `tagline`, `strengths`(3줄), `heroes`([{n, note}] 대표 제품), `focus`
 커밋 전 확인: `grep -ri "supply\|fob\|moq\|barcode" data/` 결과가 비어 있어야 한다.
@@ -97,3 +97,13 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 브랜드 데이터가 바뀌면 `brand_highlights.json`을 고치고 위 스크립트를 다시 돌린 뒤 커밋.
 - 이미지 교체 대기(charde·eiom·phytos·piciberry)와 lowlize(누끼 거침)는 새 사진이 오면 `thumbs/<id>.webp`만 바꾸고 다시 돌린다.
 - (선택) 25개 브랜드 카드 그리드("Brands" 섹션)는 아직 안 했다.
+
+## 카테고리 체계 (2026-11-04, 대표 지시로 재분류)
+`tools/enrich.py`가 제품명(영문 `n`·국문 `k`, 일부 라인명 `l`)을 키워드 규칙으로 읽어 `c`(카테고리)·`g`(그룹)를 다시 매긴다. `data/catalog.json`의 `groups`·`catOrder`가 사이트 레일의 표시 순서다.
+- 스킨케어(Skincare): Serums & Ampoules / Masks & Patches / Toners, Pads & Mists / Creams & Essences / Sun Care / Cleansing
+- 메이크업(Makeup): Base / Lip / Eye / Cheek & Point
+- 헤어·바디(Hair & Body): Hair Care / Body Care / Devices & Tools
+- 세트·기타(Sets & More): Sets & Kits(기획세트·트라이얼 키트·샘플 샤쉐) / Other(가글·티슈·파우치·화장솜·펌프)
+규칙 순서가 중요하다: 립 → 세트 → 헤어 → 바디 → 마스크·패치 → 아이·치크·베이스 → 선케어 → 토너·미스트 → 클렌징 → 크림(영문명에 cream/lotion/moisturizer) → 세럼·앰플·오일·파우더 → 나머지 크림·에센스. 에센스는 대표 지시대로 크림과 한 묶음, 믹순 파우더는 세럼·앰플(부스터)로 둔다.
+판단 보류 1건: 조선미녀 "Revive Eye Serum : Ginseng + Retinal"(국문 표기 인삼아이크림)은 영문 공식명이 아이세럼이라 Serums & Ampoules에 두었다. 크림으로 옮기려면 `classify()` 12번 규칙의 `not has(n, 'serum')` 예외를 빼거나 제품명을 고친다.
+재실행: `python3 -I tools/enrich.py data/catalog.json --report` (바뀐 항목 목록 출력).
