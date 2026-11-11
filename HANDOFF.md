@@ -141,10 +141,11 @@ tools/              데이터 재생성 스크립트 (아래 참고)
   - 메디큐브 제로 모공 패드 "Pore care" → "Clean-pore feel", 요약 "visibly refined pores" → "a clean-pore feel"
   - 믹순 순디 에센스 Best for "Sensitive and irritated skin" → "Sensitive, easily irritated skin"
   - 그대로 둔 것: "Calming"·"Healthy glow"·"Gentle exfoliation" 같은 일반 화장품 표현, 주의 문구(예: 일부 사용자의 트러블 언급), 제품 공식명.
-- 게시: `kbeauty-catalog/`에서 `handoff/`를 빼고 공개 저장소 `rigeltop-byte/kbeauty-catalog` main에 복사·커밋·푸시(커밋 `1045226`). GitHub의 "pages build and deployment"가 그 커밋으로 성공(2026-11-11 09:05 UTC). 작업한 클라우드 세션에서는 `rigeltop-byte.github.io` 접속이 네트워크 설정으로 막혀 페이지를 직접 열어 보지는 못했다.
+- 게시: `kbeauty-catalog/`에서 `handoff/`를 빼고 공개 저장소 `rigeltop-byte/kbeauty-catalog` main에 복사·커밋·푸시(커밋 `1045226`). GitHub의 "pages build and deployment"가 그 커밋으로 성공(2026-11-11 09:05 UTC). 공개 주소 반영은 대표가 직접 확인했다(Texture 필터 23개, 인사이트 카드 표시, 플랫폼명 없음). 작업한 클라우드 세션에서는 `rigeltop-byte.github.io` 접속이 막혀 있어 페이지를 직접 열지 못했고, 네트워크 허용 설정은 대표 지시로 하지 않았다.
 - 게시 전 확인
   - `grep -ri "supply\|fob\|moq\|barcode" data/`는 **비어 있지 않다**. 190건 모두 `images`의 base64 이미지 글자열 안에서 우연히 맞은 것이고(이전 게시본도 같은 190건, 이미지 데이터는 이전 게시본과 동일), 이미지 밖의 텍스트·키에는 0건이다. 다음부터는 이미지 값을 빼고 검사해야 의미가 있다: `python3 -c "import json,re;d=json.load(open('data/catalog.json'));d.pop('images');print(re.findall(r'(?i)supply|fob|moq|barcode',json.dumps(d,ensure_ascii=False)))"` → `[]`.
   - 제품 필드는 이전 게시본에서 `ins`만 늘었다(공급가·바코드 필드 없음).
   - 인사이트 화면(카드 23개, 상세 패널 23개, 브랜드 대표 제품 7곳)에 플랫폼명·별점 없음, 면책 문구 전부 표시.
-- 대표 판단 필요(이번에 고치지 않음): 11월 4일부터 게시 중인 **브랜드 소개 카드** 문구에 유통 채널명과 평점 숫자가 있다. Olive Young 언급 6곳(Braye, Charde, EIOM, FRANZ, Losy Kim, Touch in Sol), Musinsa 평점 숫자 2곳(Losy Kim, Lowlize). 원본은 `handoff/brand-highlights/brand_highlights.json`. 빼기로 하면 그 파일을 고치고 `tools/apply_brands.py`를 다시 돌린다.
+- 브랜드 소개 카드의 평점 숫자 정리(2026-11-11, 대표 지시): Losy Kim "Musinsa rating 4.8 with 1,000+ reviews" → "Strong customer reviews in Korea", Lowlize "High Musinsa ratings: serum 4.8, sun serum 4.9" → "Strong customer reviews in Korea for the serum and sun serum". `handoff/brand-highlights/brand_highlights.json`을 고치고 `tools/apply_brands.py`를 다시 돌렸다(바뀐 것은 이 두 줄뿐). 브랜드 카드에 다른 평점·리뷰 수 숫자는 없다. 유통 채널 사실(Olive Young 입점 등 6곳)은 대표 결정으로 그대로 둔다. 앞으로 브랜드 카드에도 평점·리뷰 수 숫자는 쓰지 않는다.
+- 남아 있는 것(참고): 플랫폼 순위 문구 2곳 — Charde "ranks #1 on its Musinsa brand page", EIOM "#1 in category on Qoo10 Japan". 평점·리뷰 수가 아니라서 이번에는 두었다.
 - 다음에 게시할 때: 공개 저장소를 쓰기 권한으로 연결 → `handoff/`만 빼고 폴더 내용을 덮어쓰기 → 위 검사 → 커밋·푸시.
