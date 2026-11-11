@@ -105,5 +105,29 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 헤어·바디(Hair & Body): Hair Care / Body Care / Devices & Tools
 - 세트·기타(Sets & More): Sets & Kits(기획세트·트라이얼 키트·샘플 샤쉐) / Other(가글·티슈·파우치·화장솜·펌프)
 규칙 순서가 중요하다: 립 → 세트 → 헤어 → 바디 → 마스크·패치 → 아이·치크·베이스 → 선케어 → 토너·미스트 → 클렌징 → 크림(영문명에 cream/lotion/moisturizer) → 세럼·앰플·오일·파우더 → 나머지 크림·에센스. 에센스는 대표 지시대로 크림과 한 묶음, 믹순 파우더는 세럼·앰플(부스터)로 둔다.
-판단 보류 1건: 조선미녀 "Revive Eye Serum : Ginseng + Retinal"(국문 표기 인삼아이크림)은 영문 공식명이 아이세럼이라 Serums & Ampoules에 두었다. 크림으로 옮기려면 `classify()` 12번 규칙의 `not has(n, 'serum')` 예외를 빼거나 제품명을 고친다.
+확정(대표, 2026-11-05): 조선미녀 "Revive Eye Serum : Ginseng + Retinal"(국문 표기 인삼아이크림)은 영문 공식명대로 Serums & Ampoules에 둔다. 크림으로 옮기지 않는다.
 재실행: `python3 -I tools/enrich.py data/catalog.json --report` (바뀐 항목 목록 출력).
+
+## 다음 작업: 텍스처·리뷰 인사이트 (2026-11-11, Aside 조사)
+대표 요청: 제형·발림성·마무리감을 점 척도(예: Smooth ↔ Sticky)로 가독성 있게 보여주고 AI 리뷰 요약을 추가.
+- 작업 지시서: `handoff/review-insights/README.md` (먼저 읽기, 1장 법·약관 원칙 필수)
+- 데이터: `handoff/review-insights/review_insights.json` — 제품 14개(23개 SKU) + 제품 목록 없는 브랜드 대표 제품 7개
+- 목업: `handoff/review-insights/mockup.html` (카드 + 상세 패널)
+- 플랫폼명·별점·리뷰 원문 금지, AI 요약 면책 문구 필수, `summary_kr`·`sentiment`는 사이트에 넣지 않음
+- 공개 저장소 게시는 대표 승인 후
+
+### 반영 결과 (2026-11-11, Claude Code)
+- `python3 -I tools/apply_insights.py --catalog data/catalog.json --insights handoff/review-insights/review_insights.json` (`--dry-run`은 매칭만 확인). 여러 번 돌려도 결과가 같다. 결과: 제품 14개 전부 매칭, **SKU 23개**에 `ins`, 브랜드 7곳에 `heroIns`, 척도 정의 18개는 최상위 `scales`, 기준 월은 `insUpdated`.
+  - 제품 `ins` = `{kind, vol, sc:[[척도키, 1~5]], tl, loved, gtk, best, sum, note?}`. `summary_kr`·`sentiment`는 복사하지 않고, 새어 나가면 스크립트가 멈춘다.
+  - 이름이 안 맞으면 `WARNING: no catalog product named …`(가까운 이름 제안)로 알리고 건너뛴다.
+  - 문구 점검: 플랫폼명·별점 표현·의약품처럼 보이는 단어(cure, treat, heal, hair loss 등)가 데이터에 있으면 **쓰기 전에 멈춘다**. 걸리면 `review_insights.json` 문구를 고치고 다시 돌린다.
+- 화면(`index.html`)
+  - 제품 카드: 국문명 아래 `tl` 한 줄(2줄 말줄임) → 척도 2개 → "Texture & review insight →". 링크는 척도 바로 아래에 두었다(목업은 버튼 아래). 인사이트 없는 카드와 한 줄에 섞여도 가격·"Add to inquiry" 버튼 높이가 맞도록 하기 위해서다. 인사이트 없는 제품은 기존 카드 그대로.
+  - 상세 패널(`#insight`): 데스크톱은 오른쪽 드로어, 640px 이하는 바텀시트. 순서는 지시서와 같다(헤더 → Texture & feel 전체 척도 + (i) 설명 → Loved for → Best for → Good to know → AI Review Insight → 면책 문구 → Add to inquiry). Esc·바깥 클릭으로 닫히고 닫으면 원래 링크로 포커스가 돌아간다.
+  - 척도: `scaleRow()` 하나로 그린다. bipolar는 선 위 5칸 중 한 칸(장미색), level은 점 채움. `role="img"` + `aria-label`("Skin feel: 2 of 5, between Smooth and Sticky" / "Hydration: 4 of 5"). 별·점수처럼 보이는 표시는 쓰지 않았다.
+  - 브랜드 소개 카드: `heroIns`가 있으면 카드 아래쪽에 대표 제품 인사이트(척도 전체·Loved for·Best for·Good to know·AI 요약·면책 문구).
+  - 필터: 레일 맨 위 "Texture" 상자(모바일은 칩 한 줄 추가). "Texture insight" 스위치 + Lightweight(texture≤2)·Non-sticky(feel≤2)·Dewy finish(finish≥4)·Extra gentle(gentleness≥4). 칩은 여러 개 고르면 모두 만족하는 제품만. 숫자는 현재 브랜드·그룹·분류 안에서의 개수. 조건은 `TEX` 배열 한 곳에서 고친다.
+  - 푸터에 "척도·리뷰 인사이트는 공개 소비자 의견을 우리가 요약한 것이며 제품 효능 주장이 아니다" 한 문장 추가.
+- 확인: 375px·1440px 스크린샷 `handoff/review-insights/screenshots/`. 기존 기능(검색·브랜드/그룹/분류 필터·정렬·더 보기·문의 담기·수량·복사·새로고침 후 유지)은 수정 전후 화면을 같은 순서로 조작해 결과가 같은지 비교했다(20개 항목 일치).
+- 안 한 것: 문의 복사 텍스트에 `texture_line` 넣기(지시서 "추가하면 좋은 기능" 2번), 척도 비교(3번), 이미지 위 "Insight" 배지(선택 항목).
+- 공개 저장소(`rigeltop-byte/kbeauty-catalog`)에는 아직 올리지 않았다. 올릴 때 `handoff/`는 제외.

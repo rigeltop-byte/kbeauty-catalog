@@ -28,6 +28,8 @@
   --accent-soft: #f7e7eb;
   --ok: #2d7a57;
   --ok-soft: #e4f2ea;
+  --note: #faf6ee;
+  --note-line: #eee3cf;
   --shadow-sm: 0 1px 2px rgba(29, 27, 26, .05), 0 2px 8px rgba(29, 27, 26, .05);
   --shadow-lg: 0 10px 40px rgba(29, 27, 26, .16);
   --serif: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
@@ -218,6 +220,102 @@ button { cursor: pointer; }
 .drawer .empty-list b { display: block; font-family: var(--serif); font-weight: 500; font-size: 22px; color: var(--ink); margin-bottom: 6px; }
 .toast { position: fixed; left: 50%; bottom: calc(28px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: #fff; padding: 11px 18px; border-radius: 999px; font-size: 14px; font-weight: 500; z-index: 50; box-shadow: var(--shadow-lg); white-space: nowrap; max-width: calc(100vw - 32px); overflow: hidden; text-overflow: ellipsis; }
 
+/* Texture & review insight. Our own 1-5 assessment of aggregated public feedback: drawn as dots on a line, never as stars or a score. */
+.tl { margin-top: 6px; font-size: 12.5px; line-height: 1.4; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+/* Scale rows share one set of columns (subgrid) so the tracks line up under each other.
+   bipolar: a position between two end labels. level: 1-5 filled dots. */
+.scales { display: grid; grid-template-columns: auto auto minmax(44px, 1fr) auto; gap: 11px 10px; align-items: center; }
+.sc { display: grid; grid-template-columns: subgrid; grid-column: 1 / -1; align-items: center; row-gap: 2px; }
+.sc .sl { font-size: 12.5px; line-height: 1.3; color: var(--ink-2); padding-right: 8px; }
+.sc .ll, .sc .rl { font-size: 11.5px; line-height: 1.3; color: var(--muted); white-space: nowrap; }
+.sc .ll { text-align: right; }
+.track { display: flex; justify-content: space-between; align-items: center; position: relative; height: 14px; }
+.track::before { content: ""; position: absolute; left: 3px; right: 3px; top: 50%; height: 1px; background: var(--line-strong); }
+.track i { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line-strong); }
+.track i.on { width: 12px; height: 12px; margin: 0 -2.5px; background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.sc .lv { grid-column: 2 / -1; display: flex; gap: 5px; align-items: center; height: 14px; }
+.lv i { width: 9px; height: 9px; border-radius: 50%; background: var(--line-strong); }
+.lv i.on { background: var(--ink-2); }
+.scales.mini { grid-template-columns: auto minmax(40px, 1fr) auto; gap: 6px 8px; margin-top: 8px; }
+.scales.mini .sl { grid-column: 1 / -1; font-size: 11px; color: var(--muted); padding: 0; }
+.scales.mini .ll, .scales.mini .rl { font-size: 10.5px; }
+.scales.mini .ll { text-align: left; }
+.scales.mini .lv { grid-column: 1 / -1; }
+@supports not (grid-template-columns: subgrid) {
+  .scales, .scales.mini { grid-template-columns: minmax(0, 1fr); }
+  .sc { grid-column: auto; grid-template-columns: 108px 84px minmax(44px, 1fr) 84px; column-gap: 10px; }
+  .scales.mini .sc { grid-template-columns: auto minmax(40px, 1fr) auto; column-gap: 8px; }
+}
+.ins-link { align-self: flex-start; margin-top: 8px; padding: 2px 0; border: 0; background: transparent; color: var(--accent); font-size: 12.5px; font-weight: 600; line-height: 1.3; text-align: left; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s ease; }
+.ins-link > span { white-space: nowrap; }
+.ins-link:hover { text-decoration-color: currentColor; }
+
+/* Insight blocks (detail panel and brand card) */
+.ins-sec { margin-top: 22px; }
+.ins-sec h4 { margin: 0 0 10px; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.info { width: 18px; height: 18px; padding: 0; border: 1px solid var(--line-strong); border-radius: 50%; background: var(--surface); color: var(--muted); font-family: var(--serif); font-size: 12px; font-style: italic; font-weight: 500; line-height: 1; letter-spacing: 0; text-transform: none; display: inline-grid; place-items: center; }
+.info:hover, .info[aria-expanded="true"] { border-color: var(--ink); color: var(--ink); }
+.tipbox { display: none; margin: -2px 0 12px; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.ins-sec h4:has(.info:hover) + .tipbox, .ins-sec h4:has(.info:focus-visible) + .tipbox, .ins-sec h4:has(.info[aria-expanded="true"]) + .tipbox { display: block; }
+.loved { display: flex; flex-wrap: wrap; gap: 6px; }
+.loved span { display: inline-flex; align-items: center; gap: 5px; background: var(--ok-soft); color: var(--ok); border-radius: 999px; font-size: 12.5px; font-weight: 500; line-height: 1.3; padding: 5px 11px; }
+.loved svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.bestfor { font-size: 14px; color: var(--ink); }
+.gtk { background: var(--note); border: 1px solid var(--note-line); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; line-height: 1.45; color: var(--ink-2); }
+.ai { background: var(--accent-soft); border-radius: var(--r-md); padding: 14px 16px; }
+.ai-t { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.ai-p { margin-top: 6px; font-size: 14px; line-height: 1.55; color: var(--ink); }
+.ai .ai-meta { margin-top: 8px; font-size: 11.5px; color: var(--muted); }
+.ins-note { margin-top: 10px; font-size: 12px; color: var(--muted); }
+.disc { margin-top: 12px; font-size: 11px; line-height: 1.5; color: var(--muted); }
+
+/* Detail panel: right drawer on desktop, bottom sheet on phones */
+.drawer.ins { width: min(520px, 100%); background: var(--surface); animation: ins-in .22s cubic-bezier(.2, .7, .2, 1); }
+.drawer.ins header { background: var(--surface); }
+.drawer.ins header h2 { font-size: 20px; }
+.drawer.ins .scroll { padding: 20px 24px 24px; }
+.ins-head { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: center; }
+.ins-head .th { width: 96px; height: 96px; background: var(--well); border-radius: var(--r-md); overflow: hidden; display: grid; place-items: center; }
+.ins-head .th img { width: 100%; height: 100%; object-fit: contain; padding: 9%; mix-blend-mode: multiply; display: block; }
+.ins-head .th span { font-family: var(--serif); font-size: 13px; color: var(--faint); text-align: center; padding: 6px; }
+.ins-head .brand { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.ins-head h3 { margin: 2px 0 0; font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.2; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.ins-head .sub { margin-top: 4px; font-size: 12.5px; color: var(--muted); }
+.ins-lead { margin-top: 16px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+.ins-foot { padding: 14px 24px; border-top: 1px solid var(--line); background: var(--surface); }
+.ins-foot .btn { width: 100%; height: 44px; }
+.ins-foot .btn svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes ins-in { from { transform: translateX(28px); opacity: 0; } }
+@keyframes sheet-in { from { transform: translateY(36px); opacity: 0; } }
+
+/* Brand card: hero product insight (brands without a product list) */
+.bp-ins { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 20px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 4px 36px; align-items: start; }
+.bp-ins .bi-kicker { margin: 0 0 4px; font-size: 11.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.bp-ins h3 { margin: 0; font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.2; letter-spacing: -.01em; }
+.bp-ins .ins-lead { margin-top: 6px; font-size: 14.5px; }
+.bp-ins .ins-sec { margin-top: 18px; }
+.bp-ins .bi-side > .ins-sec:first-child { margin-top: 0; }
+
+/* Rail: texture filter */
+.rail-tex { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r-md); padding: 14px 14px 12px; }
+.rail-tex h2 { margin-bottom: 8px; }
+.tswitch { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 8px; width: 100%; padding: 4px 0; border: 0; background: transparent; text-align: left; font-size: 14px; font-weight: 500; color: var(--ink); }
+.tswitch .fc { font-size: 12px; color: var(--faint); }
+.tswitch .sw { position: relative; width: 34px; height: 20px; border-radius: 999px; background: var(--faint); transition: background .15s ease; }
+.tswitch .sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(29, 27, 26, .25); transition: transform .15s ease; }
+.tswitch[aria-checked="true"] .sw { background: var(--accent); }
+.tswitch[aria-checked="true"] .sw::after { transform: translateX(14px); }
+.tchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.tchip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line-strong); background: var(--surface); border-radius: 999px; padding: 5px 9px; font-size: 12px; font-weight: 500; color: var(--ink-2); white-space: nowrap; transition: background .12s ease, border-color .12s ease, color .12s ease; }
+.tchip:hover { border-color: var(--ink); }
+.tchip .n { font-size: 11px; color: var(--faint); }
+.tchip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.tchip[aria-pressed="true"] .n { color: var(--accent); }
+.tchip:disabled, .tswitch:disabled { opacity: .45; cursor: default; }
+.tchip:disabled:hover { border-color: var(--line-strong); }
+.rail-tex .hint { margin: 10px 0 0; max-width: none; font-size: 11.5px; line-height: 1.4; color: var(--muted); }
+.empty .btn { margin-top: 14px; }
+
 footer { border-top: 1px solid var(--line); background: var(--surface); }
 footer .wrap { padding-block: 28px 40px; font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
 footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
@@ -225,6 +323,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; }
   .card:hover .well img { transform: none; }
+  .drawer.ins { animation: none !important; }
 }
 
 /* Tablet / mobile */
@@ -243,6 +342,10 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   .chip .req { font-size: 10px; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
   .chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
   .chip[aria-pressed="true"] .n, .chip[aria-pressed="true"] .req { color: rgba(255, 255, 255, .7); }
+  .chip.tx[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .chip.tx[aria-pressed="true"] .n { color: var(--accent); }
+  .chip:disabled { opacity: .45; }
+  .bp-ins { grid-template-columns: minmax(0, 1fr); gap: 18px; }
   .chip-lbl { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; }
   .hero { grid-template-columns: 1fr; gap: 20px; padding-block: 32px 28px; }
   .grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 22px 14px; }
@@ -269,6 +372,24 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   .brand-panel h2 { font-size: 26px; }
   .toolbar { flex-wrap: wrap; gap: 10px; }
   .drawer form .row { grid-template-columns: 1fr; }
+  .drawer.ins { top: auto; left: 0; width: 100%; max-height: 90vh; max-height: 90dvh; border-radius: var(--r-lg) var(--r-lg) 0 0; padding-top: 0; animation-name: sheet-in; }
+  .drawer.ins header { position: relative; padding: 20px 20px 12px; border-radius: var(--r-lg) var(--r-lg) 0 0; }
+  .drawer.ins header::before { content: ""; position: absolute; top: 8px; left: 50%; width: 36px; height: 4px; margin-left: -18px; border-radius: 2px; background: var(--line-strong); }
+  .drawer.ins .scroll { padding: 16px 20px 20px; }
+  .ins-head { grid-template-columns: 76px minmax(0, 1fr); gap: 14px; }
+  .ins-head .th { width: 76px; height: 76px; }
+  .ins-head h3 { font-size: 19px; }
+  .ins-foot { padding: 12px 20px; }
+  .ins-link { font-size: 11.5px; letter-spacing: -.01em; }
+}
+@media (max-width: 360px) {
+  .scales.mini { column-gap: 5px; }
+  .scales.mini .ll, .scales.mini .rl { white-space: normal; line-height: 1.15; }
+  .ins-link { font-size: 11px; }
+}
+@media (max-width: 640px) {
+  .scales { column-gap: 8px; }
+  .sc .sl { padding-right: 2px; }
 }
 </style>
 </head>
@@ -308,6 +429,12 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 
 <main class="wrap layout" id="shop">
   <aside class="rail" aria-label="Filters">
+    <div class="rail-group rail-tex" id="texRail" hidden>
+      <h2>Texture</h2>
+      <button class="tswitch" type="button" role="switch" id="texSwitch" data-tx="only" aria-checked="false"><span>Texture insight</span><span class="fc num" id="texCount"></span><span class="sw" aria-hidden="true"></span></button>
+      <div class="tchips" id="texList" role="group" aria-label="Texture filters"></div>
+      <p class="hint">Our 1&ndash;5 assessment of texture and feel, available for selected products.</p>
+    </div>
     <div class="rail-group">
       <h2>Brands <span id="railBrandCount"></span></h2>
       <div class="flist" id="brandList"></div>
@@ -324,6 +451,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       <div><p class="chip-lbl">Brands</p><div class="chip-row" id="brandChips"></div></div>
       <div><p class="chip-lbl">Type</p><div class="chip-row" id="groupChips"></div></div>
       <div><p class="chip-lbl">Categories</p><div class="chip-row" id="catChips"></div></div>
+      <div id="texChipsWrap" hidden><p class="chip-lbl">Texture</p><div class="chip-row" id="texChips"></div></div>
     </div>
     <div id="brandPanel" hidden></div>
     <div class="groups" id="groups" aria-label="Product groups"></div>
@@ -345,7 +473,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 <footer>
   <div class="wrap">
     <span class="fm">K-Beauty Trade Catalog</span>
-    <span>Retail prices are suggested retail (MSRP) in USD from brand offer sheets. Trade pricing on request. Product images are for reference. Catalog updated <span id="upd">Nov 2026</span>.</span>
+    <span>Retail prices are suggested retail (MSRP) in USD from brand offer sheets. Trade pricing on request. Product images are for reference. Texture scales and review insights are our own summary of aggregated public consumer feedback, not product claims. Catalog updated <span id="upd">Nov 2026</span>.</span>
   </div>
 </footer>
 
@@ -371,14 +499,32 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     </form>
   </div>
 </aside>
+<aside class="drawer ins" id="insight" hidden aria-labelledby="insTitle" role="dialog" aria-modal="true">
+  <header>
+    <h2 id="insTitle">Texture &amp; review insight</h2>
+    <button class="x" id="closeIns" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+  </header>
+  <div class="scroll" id="insBody"></div>
+  <div class="ins-foot"><button class="btn btn-ink" type="button" id="insAdd"></button></div>
+</aside>
 <div class="toast" id="toast" hidden></div>
 
 <script>
 (function () {
   const $ = (s) => document.querySelector(s);
-  const state = { brand: null, group: 'All', cat: 'All', q: '', sort: 'brand', shown: 48, inq: [] };
+  const state = { brand: null, group: 'All', cat: 'All', q: '', sort: 'brand', shown: 48, inq: [], texOnly: false, tex: new Set() };
   const GROUP_LABEL = { 'Sets & More': 'Sets & more' };
-  let DATA = null, BRANDS = {}, IMG = {};
+  let DATA = null, BRANDS = {}, IMG = {}, SCALES = {}, HAS_INS = false, insId = null;
+  // Texture filters read our 1-5 scale values (see catalog.json "scales").
+  const TEX = [
+    { id: 'light', label: 'Lightweight', test: (v) => v.texture <= 2 },
+    { id: 'nonsticky', label: 'Non-sticky', test: (v) => v.feel <= 2 },
+    { id: 'dewy', label: 'Dewy finish', test: (v) => v.finish >= 4 },
+    { id: 'gentle', label: 'Extra gentle', test: (v) => v.gentleness >= 4 },
+  ];
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const DISCLAIMER = 'AI-generated summary of aggregated public consumer feedback, written by us. Not a product claim; individual experience may vary.';
+  const SCALE_TIP = 'Rated by our team from aggregated consumer reviews (1–5).';
   const PAGE = 48;
   const KEEP = new Set(['PDRN','SPF','PA','AHA','BHA','PHA','EGF','NAD','TXA','UV','CICA','LHA','NMN','AGE-R','KR','US','EU','MTS','PH','II','III','EX','HA','PRO','X2','N','B5','C','A','E','K','BB','CC','TECA','LED','EMS','HCT','H.C.T.']);
   const LOW = new Set(['and','of','with','for','the','in','to','a']);
@@ -405,9 +551,94 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
   function toast(msg) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(() => { t.hidden = true; }, 2200); }
 
+  // Texture & review insight ------------------------------------------------
+  function texOn() { return state.texOnly || state.tex.size > 0; }
+  function texMatch(p) { return !!p.ins && TEX.every((t) => !state.tex.has(t.id) || p._tx[t.id]); }
+  function scaleRow(key, v) {
+    const d = SCALES[key];
+    if (!d || !(v >= 1 && v <= 5)) return '';
+    if (d.type === 'bipolar') {
+      let dots = '';
+      for (let i = 1; i <= 5; i++) dots += i === v ? '<i class="on"></i>' : '<i></i>';
+      return `<div class="sc" role="img" aria-label="${esc(d.label)}: ${v} of 5, between ${esc(d.left)} and ${esc(d.right)}"><span class="sl">${esc(d.label)}</span><span class="ll">${esc(d.left)}</span><span class="track">${dots}</span><span class="rl">${esc(d.right)}</span></div>`;
+    }
+    let dots = '';
+    for (let i = 1; i <= 5; i++) dots += i <= v ? '<i class="on"></i>' : '<i></i>';
+    return `<div class="sc" role="img" aria-label="${esc(d.label)}: ${v} of 5"><span class="sl">${esc(d.label)}</span><span class="lv">${dots}</span></div>`;
+  }
+  function scalesHtml(sc, mini) {
+    const rows = (sc || []).slice(0, mini ? 2 : 99).map(([k, v]) => scaleRow(k, v)).join('');
+    return rows ? `<div class="scales${mini ? ' mini' : ''}">${rows}</div>` : '';
+  }
+  function insScales(x) {
+    const rows = scalesHtml(x.sc, false);
+    return rows ? `<div class="ins-sec"><h4>Texture &amp; feel <button class="info" type="button" data-tip aria-expanded="false" aria-label="How these scales are rated">i</button></h4><div class="tipbox" role="note">${esc(SCALE_TIP)}</div>${rows}</div>` : '';
+  }
+  function insFacts(x) {
+    return (x.loved && x.loved.length ? `<div class="ins-sec"><h4>Loved for</h4><div class="loved">${x.loved.map((t) => `<span>${CHECK}${esc(t)}</span>`).join('')}</div></div>` : '')
+      + (x.best ? `<div class="ins-sec"><h4>Best for</h4><div class="bestfor">${esc(x.best)}</div></div>` : '')
+      + (x.gtk ? `<div class="ins-sec"><h4>Good to know</h4><div class="gtk">${esc(x.gtk)}</div></div>` : '');
+  }
+  function insAI(x) {
+    if (!x.sum) return '';
+    const upd = /^\d{4}-\d{2}/.test(DATA.insUpdated || '') ? ' · Updated ' + MONTHS[+DATA.insUpdated.slice(5, 7) - 1] + ' ' + DATA.insUpdated.slice(0, 4) : '';
+    return `<div class="ins-sec"><div class="ai"><div class="ai-t"><span aria-hidden="true">✦ </span>AI Review Insight</div><div class="ai-p">${esc(x.sum)}</div>`
+      + `<div class="ai-meta">Summarized from ${x.vol ? esc(x.vol) + ' ' : ''}Korean consumer reviews${upd}</div></div>`
+      + (x.note ? `<div class="ins-note">${esc(x.note)}</div>` : '')
+      + `<div class="disc">${esc(DISCLAIMER)}</div></div>`;
+  }
+  function renderTex() {
+    const base = DATA.products.filter((p) => (!state.brand || p.b === state.brand) && (state.group === 'All' || p.g === state.group) && (state.cat === 'All' || p.c === state.cat));
+    const withIns = base.filter((p) => p.ins);
+    const show = HAS_INS && base.length > 0;
+    $('#texRail').hidden = !show; $('#texChipsWrap').hidden = !show;
+    if (!show) return;
+    const on = texOn();
+    const sw = $('#texSwitch');
+    sw.setAttribute('aria-checked', on); sw.disabled = !on && !withIns.length;
+    $('#texCount').textContent = withIns.length;
+    const n = (t) => withIns.filter((p) => p._tx[t.id]).length;
+    $('#texList').innerHTML = TEX.map((t) => { const c = n(t), act = state.tex.has(t.id); return `<button class="tchip" type="button" data-tx="${t.id}" aria-pressed="${act}"${!act && !c ? ' disabled' : ''}>${esc(t.label)}<span class="n num">${c}</span></button>`; }).join('');
+    $('#texChips').innerHTML = `<button class="chip tx" type="button" data-tx="only" aria-pressed="${on}"${!on && !withIns.length ? ' disabled' : ''}>Texture insight<span class="n">${withIns.length}</span></button>`
+      + TEX.map((t) => { const c = n(t), act = state.tex.has(t.id); return `<button class="chip tx" type="button" data-tx="${t.id}" aria-pressed="${act}"${!act && !c ? ' disabled' : ''}>${esc(t.label)}<span class="n">${c}</span></button>`; }).join('');
+  }
+  function toggleTex(id) {
+    if (id === 'only') { if (texOn()) { state.texOnly = false; state.tex.clear(); } else state.texOnly = true; }
+    else if (state.tex.has(id)) state.tex.delete(id);
+    else { state.tex.add(id); state.texOnly = true; }
+    state.shown = PAGE; renderTex(); renderGrid();
+  }
+  function insAddLabel(id) {
+    const added = state.inq.some((x) => x.t === 'p' && x.id === id);
+    const b = $('#insAdd'); b.dataset.add = id; b.setAttribute('aria-pressed', added);
+    b.innerHTML = added ? CHECK + 'Added to inquiry' : PLUS + 'Add to inquiry';
+  }
+  function openInsight(id) {
+    const p = DATA.byId[id]; if (!p || !p.ins) return;
+    const b = BRANDS[p.b], x = p.ins;
+    insId = id;
+    const img = p.i && IMG[p.i] ? `<img src="${IMG[p.i]}" alt="">` : `<span>${esc(b.name)}</span>`;
+    const sub = [x.kind, p.v].filter(Boolean).map(esc).join(' · ');
+    $('#insBody').innerHTML = `<div class="ins-head"><div class="th">${img}</div><div><div class="brand">${esc(b.name)}</div><h3>${esc(p.nn)}</h3>${sub ? `<div class="sub">${sub}</div>` : ''}</div></div>`
+      + (x.tl ? `<div class="ins-lead">${esc(x.tl)}</div>` : '') + insScales(x) + insFacts(x) + insAI(x);
+    insAddLabel(id);
+    $('#insight').hidden = false; $('#scrim').hidden = false;
+    document.body.style.overflow = 'hidden';
+    $('#insBody').scrollTop = 0;
+    setTimeout(() => $('#closeIns').focus(), 0);
+  }
+  function closeInsight() {
+    $('#insight').hidden = true; $('#scrim').hidden = true;
+    document.body.style.overflow = '';
+    const back = insId && document.querySelector(`[data-ins="${insId}"]`);
+    insId = null;
+    if (back) back.focus();
+  }
+
   function filtered() {
     const q = state.q.trim().toLowerCase();
     let list = DATA.products.filter((p) => (!state.brand || p.b === state.brand) && (state.group === 'All' || p.g === state.group) && (state.cat === 'All' || p.c === state.cat));
+    if (texOn()) list = list.filter(texMatch);
     if (q) {
       const terms = q.split(/\s+/);
       list = list.filter((p) => { const hay = p._s; return terms.every((t) => hay.includes(t)); });
@@ -448,6 +679,11 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     const heroes = (b.heroes || []).map((h) => b.count
       ? `<button class="hero" type="button" data-q="${esc(h.n)}" title="Find in this brand"><b>${esc(h.n)}</b>${h.note ? `<span>${esc(h.note)}</span>` : ''}</button>`
       : `<span class="hero"><b>${esc(h.n)}</b>${h.note ? `<span>${esc(h.note)}</span>` : ''}</span>`).join('');
+    const hi = b.heroIns;
+    const heroIns = hi && hi.sc && hi.sc.length ? `<div class="bp-ins">
+        <div class="bi-main"><p class="bi-kicker">Hero product · texture &amp; review insight</p><h3>${esc(hi.n)}</h3>${hi.tl ? `<div class="ins-lead">${esc(hi.tl)}</div>` : ''}${insScales(hi)}</div>
+        <div class="bi-side">${insFacts(hi)}${insAI(hi)}</div>
+      </div>` : '';
     el.className = 'brand-panel';
     el.innerHTML = `
       <div class="bp-thumb">${thumb}</div>
@@ -465,7 +701,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       <div class="actions">
         ${b.count ? '' : `<button class="btn btn-ink" type="button" data-brand-req="${b.id}" aria-pressed="${inInq}">${inInq ? CHECK + ' Added to inquiry' : 'Request product list'}</button>`}
         <button class="btn btn-outline" type="button" id="clearBrand">All brands</button>
-      </div>`;
+      </div>${heroIns}`;
     el.hidden = false;
   }
 
@@ -518,6 +754,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
         <div class="brand">${esc(b.name)}</div>
         <h3>${esc(p.nn)}</h3>
         ${p.k ? `<div class="krn">${esc(p.k)}</div>` : ''}
+        ${p.ins ? `${p.ins.tl ? `<div class="tl">${esc(p.ins.tl)}</div>` : ''}${scalesHtml(p.ins.sc, true)}<button class="ins-link" type="button" data-ins="${p.id}">Texture &amp; review <span>insight <span aria-hidden="true">&rarr;</span></span></button>` : ''}
         <div class="meta"><span class="vol">${esc(p.v)}</span><span class="price num">${p.p != null ? money(p.p) + '<small>MSRP</small>' : ''}</span></div>
         <button class="add" type="button" data-add="${p.id}" aria-pressed="${added}">${added ? CHECK + 'Added' : PLUS + 'Add to inquiry'}</button>
       </div>
@@ -534,10 +771,13 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       $('#more').hidden = true;
       return;
     }
-    const where = (b ? ' in ' + esc(b.name) : '') + (state.group !== 'All' ? ' · ' + esc(GROUP_LABEL[state.group] || state.group) : '') + (state.cat !== 'All' ? ' · ' + esc(state.cat) : '');
+    const texLbl = !texOn() ? '' : ' · ' + (state.tex.size ? TEX.filter((t) => state.tex.has(t.id)).map((t) => t.label).join(' + ') : 'Texture insight');
+    const where = (b ? ' in ' + esc(b.name) : '') + (state.group !== 'All' ? ' · ' + esc(GROUP_LABEL[state.group] || state.group) : '') + (state.cat !== 'All' ? ' · ' + esc(state.cat) : '') + esc(texLbl);
     $('#count').innerHTML = `<b>${list.length.toLocaleString('en-US')}</b> product${list.length === 1 ? '' : 's'}${where}${state.q ? ` matching &ldquo;${esc(state.q.trim())}&rdquo;` : ''}`;
     if (!list.length) {
-      g.innerHTML = `<div class="empty" style="grid-column:1/-1"><b>No products match</b>Try another search or clear the filters.</div>`;
+      g.innerHTML = texOn()
+        ? `<div class="empty" style="grid-column:1/-1"><b>No products match</b>Texture insight covers a selection of products so far.<br><button class="btn btn-outline btn-sm" type="button" id="clearTex">Clear texture filters</button></div>`
+        : `<div class="empty" style="grid-column:1/-1"><b>No products match</b>Try another search or clear the filters.</div>`;
       $('#more').hidden = true; return;
     }
     g.innerHTML = list.slice(0, state.shown).map(card).join('');
@@ -545,7 +785,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     $('#more').textContent = `Show more (${list.length - state.shown} left)`;
   }
 
-  function renderAll() { renderBrands(); renderPanel(); renderGroups(); renderCats(); renderGrid(); }
+  function renderAll() { renderBrands(); renderPanel(); renderGroups(); renderCats(); renderTex(); renderGrid(); }
 
   function setBrand(id) {
     state.brand = id || null;
@@ -584,6 +824,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     const i = state.inq.findIndex((x) => x.t === 'p' && x.id === id);
     if (i >= 0) state.inq.splice(i, 1); else { state.inq.push({ t: 'p', id, qty: '' }); toast('Added to inquiry list'); }
     syncInq(); renderGrid();
+    if (insId) insAddLabel(insId);
   }
   function toggleBrandReq(id) {
     const i = state.inq.findIndex((x) => x.t === 'brand' && x.id === id);
@@ -615,9 +856,14 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   document.addEventListener('click', (e) => {
     const t = e.target.closest('button'); if (!t) return;
     if (t.dataset.brand !== undefined) setBrand(t.dataset.brand);
-    else if (t.dataset.group) { state.group = t.dataset.group; state.cat = 'All'; state.shown = PAGE; renderGroups(); renderCats(); renderGrid(); }
-    else if (t.dataset.q !== undefined) { state.q = t.dataset.q.replace(/[^\w\s]/g, ' '); $('#q').value = state.q; state.group = 'All'; state.cat = 'All'; state.shown = PAGE; renderGroups(); renderCats(); renderGrid(); $('#grid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    else if (t.dataset.cat) { state.cat = t.dataset.cat; state.shown = PAGE; renderCats(); renderGrid(); }
+    else if (t.dataset.group) { state.group = t.dataset.group; state.cat = 'All'; state.shown = PAGE; renderGroups(); renderCats(); renderTex(); renderGrid(); }
+    else if (t.dataset.q !== undefined) { state.q = t.dataset.q.replace(/[^\w\s]/g, ' '); $('#q').value = state.q; state.group = 'All'; state.cat = 'All'; state.shown = PAGE; renderGroups(); renderCats(); renderTex(); renderGrid(); $('#grid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    else if (t.dataset.cat) { state.cat = t.dataset.cat; state.shown = PAGE; renderCats(); renderTex(); renderGrid(); }
+    else if (t.dataset.tx) toggleTex(t.dataset.tx);
+    else if (t.id === 'clearTex') { state.texOnly = false; state.tex.clear(); state.shown = PAGE; renderTex(); renderGrid(); }
+    else if (t.dataset.ins) openInsight(t.dataset.ins);
+    else if (t.id === 'closeIns') closeInsight();
+    else if (t.dataset.tip !== undefined) t.setAttribute('aria-expanded', t.getAttribute('aria-expanded') !== 'true');
     else if (t.dataset.add) toggleProduct(t.dataset.add);
     else if (t.dataset.brandReq) toggleBrandReq(t.dataset.brandReq);
     else if (t.id === 'clearBrand') setBrand(null);
@@ -633,8 +879,19 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       const inp = t.parentElement.querySelector('input'); if (inp) inp.value = state.inq[i].qty;
     }
   });
-  $('#scrim').addEventListener('click', () => openDrawer(false));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#drawer').hidden) openDrawer(false); });
+  $('#scrim').addEventListener('click', () => { if (!$('#insight').hidden) closeInsight(); else openDrawer(false); });
+  document.addEventListener('keydown', (e) => {
+    const ins = $('#insight');
+    if (e.key === 'Escape') { if (!ins.hidden) closeInsight(); else if (!$('#drawer').hidden) openDrawer(false); return; }
+    if (e.key !== 'Tab' || ins.hidden) return;
+    // keep keyboard focus inside the insight panel while it is open
+    const f = [...ins.querySelectorAll('button:not([disabled])')];
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (!ins.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
   $('#inqList').addEventListener('input', (e) => { const i = e.target.dataset.qty; if (i != null) { state.inq[+i].qty = e.target.value; save('kbtc-inq', state.inq); } });
   let qt; $('#q').addEventListener('input', (e) => { clearTimeout(qt); qt = setTimeout(() => { state.q = e.target.value; state.shown = PAGE; renderGrid(); }, 150); });
   $('#sort').addEventListener('change', (e) => { state.sort = e.target.value; state.shown = PAGE; renderGrid(); });
@@ -648,7 +905,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   });
 
   function boot(d) {
-    DATA = d; IMG = d.images;
+    DATA = d; IMG = d.images; SCALES = d.scales || {};
     d.brands.forEach((b) => { BRANDS[b.id] = b; });
     d.byId = {};
     d.products.forEach((p, i) => {
@@ -656,6 +913,12 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       p.nn = prettify(p.n);
       p._s = (p.n + ' ' + p.k + ' ' + p.c + ' ' + (p.g || '') + ' ' + p.l + ' ' + BRANDS[p.b].name + ' ' + BRANDS[p.b].kr).toLowerCase();
       d.byId[p.id] = p;
+      if (p.ins && !(p.ins.sc && p.ins.sc.some(([k, v]) => SCALES[k] && v >= 1 && v <= 5))) delete p.ins; // no drawable scale: plain card
+      if (p.ins) {
+        const v = Object.fromEntries(p.ins.sc);
+        p._tx = Object.fromEntries(TEX.map((t) => [t.id, !!t.test(v)]));
+        HAS_INS = true;
+      }
     });
     if (matchMedia('(max-width: 640px)').matches) $('#q').placeholder = 'Search';
     $('#fBrands').textContent = d.brands.length;
