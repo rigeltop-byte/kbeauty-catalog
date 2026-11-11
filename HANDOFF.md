@@ -120,7 +120,7 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - `python3 -I tools/apply_insights.py --catalog data/catalog.json --insights handoff/review-insights/review_insights.json` (`--dry-run`은 매칭만 확인). 여러 번 돌려도 결과가 같다. 결과: 제품 14개 전부 매칭, **SKU 23개**에 `ins`, 브랜드 7곳에 `heroIns`, 척도 정의 18개는 최상위 `scales`, 기준 월은 `insUpdated`.
   - 제품 `ins` = `{kind, vol, sc:[[척도키, 1~5]], tl, loved, gtk, best, sum, note?}`. `summary_kr`·`sentiment`는 복사하지 않고, 새어 나가면 스크립트가 멈춘다.
   - 이름이 안 맞으면 `WARNING: no catalog product named …`(가까운 이름 제안)로 알리고 건너뛴다.
-  - 문구 점검: 플랫폼명·별점 표현·의약품처럼 보이는 단어(cure, treat, heal, hair loss 등)가 데이터에 있으면 **쓰기 전에 멈춘다**. 걸리면 `review_insights.json` 문구를 고치고 다시 돌린다.
+  - 문구 점검: 리뷰 출처명·별점 표현·효능이나 의약품처럼 보이는 단어(cure, treat, heal, repair, redness, blackhead, improve 등)가 데이터에 있으면 **쓰기 전에 멈춘다**. 걸리면 `review_insights.json` 문구를 고치고 다시 돌린다. 출처명 목록은 `handoff/review-insights/banned_terms.json`에 따로 둔다(공개 저장소에 올라가지 않음). 제품 공식명(예: Skin Repair Serum)은 점검하지 않는다.
 - 화면(`index.html`)
   - 제품 카드: 국문명 아래 `tl` 한 줄(2줄 말줄임) → 척도 2개 → "Texture & review insight →". 링크는 척도 바로 아래에 두었다(목업은 버튼 아래). 인사이트 없는 카드와 한 줄에 섞여도 가격·"Add to inquiry" 버튼 높이가 맞도록 하기 위해서다. 인사이트 없는 제품은 기존 카드 그대로.
   - 상세 패널(`#insight`): 데스크톱은 오른쪽 드로어, 640px 이하는 바텀시트. 순서는 지시서와 같다(헤더 → Texture & feel 전체 척도 + (i) 설명 → Loved for → Best for → Good to know → AI Review Insight → 면책 문구 → Add to inquiry). Esc·바깥 클릭으로 닫히고 닫으면 원래 링크로 포커스가 돌아간다.
@@ -130,4 +130,21 @@ tools/              데이터 재생성 스크립트 (아래 참고)
   - 푸터에 "척도·리뷰 인사이트는 공개 소비자 의견을 우리가 요약한 것이며 제품 효능 주장이 아니다" 한 문장 추가.
 - 확인: 375px·1440px 스크린샷 `handoff/review-insights/screenshots/`. 기존 기능(검색·브랜드/그룹/분류 필터·정렬·더 보기·문의 담기·수량·복사·새로고침 후 유지)은 수정 전후 화면을 같은 순서로 조작해 결과가 같은지 비교했다(20개 항목 일치).
 - 안 한 것: 문의 복사 텍스트에 `texture_line` 넣기(지시서 "추가하면 좋은 기능" 2번), 척도 비교(3번), 이미지 위 "Insight" 배지(선택 항목).
-- 공개 저장소(`rigeltop-byte/kbeauty-catalog`)에는 아직 올리지 않았다. 올릴 때 `handoff/`는 제외.
+
+### 문구 정리와 공개 게시 (2026-11-11, 대표 승인)
+- 문구 기준(대표 지시): 피부 상태에 대한 **효능 주장 대신 사용감**으로 쓴다. 고친 10곳:
+  - 아누아 토너 요약 "calms redness" → "leaves a soothing, comforting feel"
+  - 아누아 클렌징 오일 "Helps with blackheads" → "Pore-clearing feel", 요약 "Blackhead care is a frequently mentioned benefit" → "A clean, pore-clearing feel is frequently mentioned"
+  - 닥터엘시아 345 요약 "calms post-blemish skin" → "feels comfortable on blemish-prone skin"
+  - 아누아 나이아신아마이드 세럼 "targets uneven tone" → "made for a brighter-looking finish", "Visible tone improvement" → "Brighter-looking tone"
+  - 메디큐브 PDRN 세럼 "Tone improvement" → "More even-looking tone"
+  - 메디큐브 제로 모공 패드 "Pore care" → "Clean-pore feel", 요약 "visibly refined pores" → "a clean-pore feel"
+  - 믹순 순디 에센스 Best for "Sensitive and irritated skin" → "Sensitive, easily irritated skin"
+  - 그대로 둔 것: "Calming"·"Healthy glow"·"Gentle exfoliation" 같은 일반 화장품 표현, 주의 문구(예: 일부 사용자의 트러블 언급), 제품 공식명.
+- 게시: `kbeauty-catalog/`에서 `handoff/`를 빼고 공개 저장소 `rigeltop-byte/kbeauty-catalog` main에 복사·커밋·푸시(커밋 `1045226`). GitHub의 "pages build and deployment"가 그 커밋으로 성공(2026-11-11 09:05 UTC). 작업한 클라우드 세션에서는 `rigeltop-byte.github.io` 접속이 네트워크 설정으로 막혀 페이지를 직접 열어 보지는 못했다.
+- 게시 전 확인
+  - `grep -ri "supply\|fob\|moq\|barcode" data/`는 **비어 있지 않다**. 190건 모두 `images`의 base64 이미지 글자열 안에서 우연히 맞은 것이고(이전 게시본도 같은 190건, 이미지 데이터는 이전 게시본과 동일), 이미지 밖의 텍스트·키에는 0건이다. 다음부터는 이미지 값을 빼고 검사해야 의미가 있다: `python3 -c "import json,re;d=json.load(open('data/catalog.json'));d.pop('images');print(re.findall(r'(?i)supply|fob|moq|barcode',json.dumps(d,ensure_ascii=False)))"` → `[]`.
+  - 제품 필드는 이전 게시본에서 `ins`만 늘었다(공급가·바코드 필드 없음).
+  - 인사이트 화면(카드 23개, 상세 패널 23개, 브랜드 대표 제품 7곳)에 플랫폼명·별점 없음, 면책 문구 전부 표시.
+- 대표 판단 필요(이번에 고치지 않음): 11월 4일부터 게시 중인 **브랜드 소개 카드** 문구에 유통 채널명과 평점 숫자가 있다. Olive Young 언급 6곳(Braye, Charde, EIOM, FRANZ, Losy Kim, Touch in Sol), Musinsa 평점 숫자 2곳(Losy Kim, Lowlize). 원본은 `handoff/brand-highlights/brand_highlights.json`. 빼기로 하면 그 파일을 고치고 `tools/apply_brands.py`를 다시 돌린다.
+- 다음에 게시할 때: 공개 저장소를 쓰기 권한으로 연결 → `handoff/`만 빼고 폴더 내용을 덮어쓰기 → 위 검사 → 커밋·푸시.
