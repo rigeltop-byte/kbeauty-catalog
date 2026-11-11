@@ -5,6 +5,7 @@ keyword rules, then writes:
   c  category : see CATS below (user-approved scheme, 2026-11-04)
   g  group    : Skincare | Makeup | Hair & Body | Sets & More
   groups / catOrder : display order for the site rail
+  tg / ingredients  : key ingredients named in the product name (tg on products, [key, label] list at top level)
 
 Scheme (대표 지시, 2026-11-04):
   Skincare   : Serums & Ampoules / Masks & Patches / Toners, Pads & Mists /
@@ -103,6 +104,71 @@ def classify(p, brand_id):
     return 'Other'
 
 
+# Key ingredients, read from the product's own name only (no claims, no outside data).
+# Makeup is skipped (shade names such as "Honey Apple"), and KUNDAL scent names after " - " are ignored.
+INGREDIENTS = [
+    ('pdrn', 'PDRN', r'pdrn|피디알엔'),
+    ('cica', 'Centella / Cica', r'centella|cica|madeca|병풀|시카'),
+    ('heartleaf', 'Heartleaf', r'heart?leaf|어성초'),
+    ('hyaluronic', 'Hyaluronic acid', r'hyalur|히알루'),
+    ('collagen', 'Collagen', r'collagen|콜라겐'),
+    ('niacinamide', 'Niacinamide', r'niacin|나이아신'),
+    ('peptide', 'Peptide', r'peptide|펩타이드'),
+    ('vitc', 'Vitamin C', r'vita(min)?[ -]?c\b|vitac\b|비타\s?씨|비타민\s?c|비타c'),
+    ('retinol', 'Retinol / Retinal', r'retino|retinal|레티놀|레티날'),
+    ('ceramide', 'Ceramide', r'ceramide|세라마이드'),
+    ('acids', 'AHA / BHA / PHA', r'\b(aha|bha|pha|lha)\b|ahabha|salicylic|succinic'),
+    ('azelaic', 'Azelaic acid', r'azelaic|아젤라'),
+    ('kojic', 'Kojic acid', r'kojic|코직'),
+    ('turmeric', 'Turmeric', r'turmeric|터메릭'),
+    ('txa', 'Tranexamic acid', r'\btxa\b|tranex|트라넥'),
+    ('glutathione', 'Glutathione', r'glutathione|글루타치온'),
+    ('exosome', 'Exosome', r'exosome|엑소좀'),
+    ('egf', 'EGF', r'\begf\b'),
+    ('stemcell', 'Stem cell culture', r'stem cell|줄기세포'),
+    ('hypochlorous', 'Hypochlorous acid', r'hypochlor'),
+    ('panthenol', 'Panthenol', r'panthenol|판테놀'),
+    ('amino', 'Amino acid', r'amino|아미노'),
+    ('soy', 'Soybean', r'soybean|soy ?milk|두유|콩|(?<!mung )(?<!red )\bbean\b'),
+    ('rice', 'Rice', r'\brice\b|쌀|라이스'),
+    ('ginseng', 'Ginseng', r'ginseng|인삼|홍삼'),
+    ('bifida', 'Bifida', r'bifida|비피다'),
+    ('galactomyces', 'Galactomyces', r'galactomyces|갈락토'),
+    ('noni', 'Noni', r'\bnoni\b|노니'),
+    ('peach', 'Peach', r'\bpeach\b|복숭아'),
+    ('birch', 'Birch', r'birch|자작'),
+    ('greentea', 'Green tea', r'green ?tea|녹차'),
+    ('propolis', 'Propolis', r'propo?lis|프로폴리스'),
+    ('snail', 'Snail mucin', r'snail|스네일'),
+    ('mugwort', 'Mugwort', r'mugwort|쑥'),
+    ('redbean', 'Red bean', r'red bean|붉은팥'),
+    ('mungbean', 'Mung bean', r'mung bean|녹두'),
+    ('lotus', 'Lotus', r'lotus|연꽃'),
+    ('reishi', 'Reishi', r'reishi|영지'),
+    ('hinoki', 'Hinoki', r'hinoki|편백'),
+    ('betaglucan', 'Beta-glucan', r'glucan|글루칸'),
+    ('honey', 'Honey', r'honey|허니'),
+    ('macadamia', 'Macadamia', r'macadamia|마카다미아'),
+    ('shea', 'Shea butter', r'shea|시어'),
+    ('teatree', 'Tea tree', r'tea ?tree|티트리'),
+    ('caffeine', 'Caffeine', r'caffeine|카페인'),
+    ('rosemary', 'Rosemary', r'rosemary|로즈마리'),
+]
+_ING = [(k, lab, re.compile(pat, re.I)) for k, lab, pat in INGREDIENTS]
+
+
+def ingredients(p, group):
+    """Ingredient keys named in the product name. Returns [] for makeup and non-cosmetic items."""
+    if group == 'Makeup' or p['c'] in ('Other', 'Devices & Tools'):
+        return []
+    n, k = p['n'], (p.get('k') or '')
+    if p['b'] == 'kundal':  # "... 500ML - CHERRY BLOSSOM" / "...1구-체리블라썸": the tail is a scent
+        n = n.split(' - ')[0]
+        k = k.rsplit('-', 1)[0]
+    hay = n + ' ' + k
+    return [key for key, _, rx in _ING if rx.search(hay)]
+
+
 def main(path, report=False):
     d = json.load(open(path, encoding='utf-8'))
     before = len(d['products'])
@@ -116,14 +182,21 @@ def main(path, report=False):
         old = p.get('c')
         p['c'] = classify(p, p['b'])
         p['g'] = GROUP[p['c']]
+        tg = ingredients(p, p['g'])
+        if tg: p['tg'] = tg
+        else: p.pop('tg', None)
         if report and old != p['c']:
             changes.append((old, p['c'], p['b'], p['n'][:60], (p.get('k') or '')[:24]))
     d['groups'] = GROUPS
     d['catOrder'] = [c for c, _ in CATS]
+    ing_n = Counter(k for p in d['products'] for k in p.get('tg', []))
+    d['ingredients'] = [[k, lab] for k, lab, _ in INGREDIENTS if ing_n[k]]
     json.dump(d, open(path, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
     print(Counter(p['g'] for p in d['products']))
     for c, g in CATS:
         print(f'  {g:12s} {c:22s} {sum(1 for p in d["products"] if p["c"] == c)}')
+    print('ingredient tags:', ', '.join(f'{lab} {ing_n[k]}' for k, lab, _ in INGREDIENTS if ing_n[k]))
+    print('products with an ingredient tag:', sum(1 for p in d['products'] if p.get('tg')))
     if report:
         print(f'\nchanged: {len(changes)}')
         for old, new, b, n, k in sorted(changes, key=lambda x: (x[0] or '', x[1])):

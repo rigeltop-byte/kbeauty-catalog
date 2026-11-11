@@ -149,3 +149,22 @@ tools/              데이터 재생성 스크립트 (아래 참고)
 - 브랜드 소개 카드의 평점 숫자 정리(2026-11-11, 대표 지시): Losy Kim "Musinsa rating 4.8 with 1,000+ reviews" → "Strong customer reviews in Korea", Lowlize "High Musinsa ratings: serum 4.8, sun serum 4.9" → "Strong customer reviews in Korea for the serum and sun serum". `handoff/brand-highlights/brand_highlights.json`을 고치고 `tools/apply_brands.py`를 다시 돌렸다(바뀐 것은 이 두 줄뿐). 브랜드 카드에 다른 평점·리뷰 수 숫자는 없다. 유통 채널 사실(Olive Young 입점 등 6곳)은 대표 결정으로 그대로 둔다. 앞으로 브랜드 카드에도 평점·리뷰 수 숫자는 쓰지 않는다.
 - 남아 있는 것(참고): 플랫폼 순위 문구 2곳 — Charde "ranks #1 on its Musinsa brand page", EIOM "#1 in category on Qoo10 Japan". 평점·리뷰 수가 아니라서 이번에는 두었다.
 - 다음에 게시할 때: 공개 저장소를 쓰기 권한으로 연결 → `handoff/`만 빼고 폴더 내용을 덮어쓰기 → 위 검사 → 커밋·푸시.
+
+## 디자인 개선·내용 보강 (2026-11-11 오후, Claude Code · Fable 5.2)
+대표 지시: 디자인을 개선하고 내용을 보강. 리뷰 인사이트(23개 SKU, 브랜드 7곳)는 Aside 조사 데이터라 늘리지 않았고, **이미 가진 데이터에서 사실로 뽑을 수 있는 것**만 더했다.
+- 데이터: `tools/enrich.py`에 **핵심 성분 태그** 추가. 제품명(영문·국문)에 성분명이 들어 있을 때만 `tg`(키 목록)를 붙이고, 최상위 `ingredients`에 `[키, 표시명]` 46종을 둔다. 876개 중 518개에 태그. 메이크업(색상명 "Honey Apple" 등)·기타·디바이스는 제외, 쿤달은 " - " 뒤 향 이름을 빼고 읽는다. 성분 목록·패턴은 `INGREDIENTS` 한 곳에서 고친다. 분류(`c`·`g`)는 그대로(재실행 시 바뀐 항목 0건).
+  - 데이터를 다시 만들 때 순서: `python3 -I tools/enrich.py data/catalog.json` → `python3 -I tools/apply_insights.py --catalog data/catalog.json --insights handoff/review-insights/review_insights.json`.
+- 화면(`index.html`)
+  - 히어로 아래 **이용 순서 3단계**(Browse → Build an inquiry list → Send it to us). 문구는 기존 안내(견적·MOQ·리드타임 회신)를 나눠 쓴 것이고 새 조건은 넣지 않았다.
+  - **Shop by brand**: 브랜드 섬네일 25개를 가로로 넘기는 줄(제품 목록 있는 11곳을 제품 수 순으로, 뒤에 On request 14곳). 누르면 기존 브랜드 필터와 같다. 한 번만 그리고 선택 표시만 바꾼다(`buildStrip`).
+  - **제품 상세 패널을 전 제품으로 확대**: 카드의 사진·제품명·"Texture & review insight" 링크가 모두 같은 패널(`openDetail`)을 연다. 내용: 큰 사진 → 브랜드·영문명·국문명 → 표(분류, 종류, 용량, 소비자가, "Trade price: 문의 시 MOQ·리드타임과 함께 견적", 핵심 성분, 판매 조건) → (있을 때만) 텍스처·리뷰 인사이트 전체 → 브랜드 소개 한 줄과 "View brand" → 같은 브랜드·분류의 다른 제품 4개 → 안내 문구. 인사이트 블록 구성·면책 문구는 그대로다.
+  - **Key ingredient 칩**: 그룹 탭 아래 한 줄. 현재 브랜드·그룹·분류 안에서 취급 브랜드가 많은 성분부터 8개, 나머지는 "+N more". 하나만 고를 수 있고 텍스처 필터와 함께 쓸 수 있다. 검색어에도 성분 표시명이 걸린다("vitamin c" → VITA C 제품).
+  - 카드: 인사이트가 있는 제품 사진 오른쪽 위에 "Insight" 표시. 필터가 걸려 있으면 개수 옆에 "Clear filters".
+  - 레일 브랜드 목록: 제품 목록 있는 11곳을 먼저 보이고 On request 14곳은 "+ 14 brands on request"로 접었다(해당 브랜드를 고르면 펼쳐진 채로 유지). 분류 목록이 스크롤 없이 보이게 하기 위해서다.
+  - 브랜드 소개 카드: 대표 제품 칸이 히어로 섹션의 `.hero` 스타일을 물려받아 두 칸으로 벌어지던 문제를 고쳤다(클래스 `bp-hero`로 분리). 버튼은 브랜드명 아래로 옮겨 좁은 화면에서도 본문 폭이 유지된다.
+  - 문의 복사 텍스트: 인사이트가 있는 제품은 다음 줄에 `Texture: …` 한 줄(지시서 "추가하면 좋은 기능" 2번).
+  - 모바일: 제품 목록 없는 브랜드에서 빈 Type·Categories 줄을 숨김.
+- 확인: 1) 데스크톱·375px에서 화면과 가로 넘침 없음, 콘솔 오류 없음 2) 검색, 그룹·분류·성분·텍스처 필터, 정렬, 더 보기, 문의 담기·저장, Esc 닫기, 닫은 뒤 포커스 복귀를 같은 순서로 조작해 확인.
+- 게시 전 검사 결과: 이미지 밖 텍스트에 공급가·MOQ·바코드·링크 0건. 인사이트 문구 245개 중 걸린 것은 제품 공식명 "Skin Repair Serum" 1건뿐. 성분·척도 표시명과 화면 문구 0건.
+- **남은 판단(대표)**: 브랜드 소개 카드에는 예전부터 유통 채널명(Olive Young·Musinsa·Amazon 등 9곳)과 효능처럼 읽힐 수 있는 표현(redness-prone, blackheads, repair, clinical, hair-loss symptom relief 등 14곳)이 있다. 이번에는 손대지 않았다. 인사이트와 같은 기준(사용감 표현)으로 고치려면 `handoff/brand-highlights/brand_highlights.json`을 고치고 `tools/apply_brands.py`를 다시 돌린다.
+- 안 한 것: 척도 비교(지시서 3번), 인사이트 제품 확대(Aside 담당), 회사명·연락처 교체.

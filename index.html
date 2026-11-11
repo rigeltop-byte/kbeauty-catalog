@@ -112,7 +112,7 @@ button { cursor: pointer; }
 
 /* Content */
 .content { min-width: 0; }
-.brand-panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; margin-bottom: 24px; display: grid; grid-template-columns: 168px minmax(0, 1fr) auto; gap: 18px 26px; align-items: start; box-shadow: var(--shadow-sm); }
+.brand-panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; margin-bottom: 24px; display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 18px 26px; align-items: start; box-shadow: var(--shadow-sm); }
 .brand-panel .bp-thumb { background: var(--well); border-radius: var(--r-md); aspect-ratio: 1 / 1; overflow: hidden; display: grid; place-items: center; }
 .brand-panel .bp-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 8%; mix-blend-mode: multiply; display: block; }
 .brand-panel .bp-thumb .noimg { font-family: var(--serif); font-size: 18px; color: var(--faint); text-align: center; padding: 12px; }
@@ -124,15 +124,16 @@ button { cursor: pointer; }
 .brand-panel .bp-str { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; max-width: 70ch; }
 .brand-panel .bp-str li { position: relative; padding-left: 18px; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
 .brand-panel .bp-str li::before { content: ""; position: absolute; left: 0; top: .55em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-.brand-panel .bp-heroes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-.brand-panel .bp-heroes .lbl { flex-basis: 100%; font-size: 11.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.brand-panel .hero { display: inline-grid; gap: 1px; border: 1px solid var(--line); background: var(--bg); border-radius: var(--r-sm); padding: 8px 12px; text-align: left; color: var(--ink); max-width: 260px; }
-.brand-panel .hero b { font-weight: 600; font-size: 13.5px; line-height: 1.3; }
-.brand-panel .hero span { font-size: 12px; color: var(--muted); line-height: 1.35; }
-.brand-panel button.hero { cursor: pointer; transition: border-color .12s ease, background .12s ease; }
-.brand-panel button.hero:hover { border-color: var(--ink); background: var(--surface); }
+.brand-panel .bp-heroes { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; margin-top: 16px; }
+.brand-panel .bp-heroes .lbl { grid-column: 1 / -1; font-size: 11.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.bp-hero { display: grid; align-content: start; gap: 2px; border: 1px solid var(--line); background: var(--bg); border-radius: var(--r-sm); padding: 10px 12px; text-align: left; color: var(--ink); }
+.bp-hero b { font-weight: 600; font-size: 13.5px; line-height: 1.3; }
+.bp-hero span { font-size: 12px; color: var(--muted); line-height: 1.35; }
+button.bp-hero { cursor: pointer; transition: border-color .12s ease, background .12s ease; }
+button.bp-hero:hover { border-color: var(--ink); background: var(--surface); }
 .brand-panel .notes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-.brand-panel .actions { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.brand-panel .bp-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px 20px; flex-wrap: wrap; }
+.brand-panel .actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; padding: 4px 11px; border-radius: 999px; background: var(--well); color: var(--ink-2); }
 .pill.warn { background: var(--accent-soft); color: var(--accent); }
 .pill.ok { background: var(--ok-soft); color: var(--ok); }
@@ -158,13 +159,18 @@ button { cursor: pointer; }
 /* Product grid */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 28px 20px; }
 .card { display: flex; flex-direction: column; min-width: 0; position: relative; }
-.card .well { position: relative; background: var(--well); border-radius: var(--r-md); aspect-ratio: 1 / 1; width: 100%; overflow: hidden; display: grid; place-items: center; transition: background .2s ease; }
+.card .well { border: 0; padding: 0; cursor: pointer; font: inherit; color: inherit; position: relative; background: var(--well); border-radius: var(--r-md); aspect-ratio: 1 / 1; width: 100%; overflow: hidden; display: grid; place-items: center; transition: background .2s ease; }
 .card:hover .well { background: var(--well-hover); }
 .card .well img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; padding: 10%; mix-blend-mode: multiply; transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
 .card:hover .well img { transform: scale(1.04); }
 .card .well .noimg { font-family: var(--serif); font-size: 18px; color: var(--faint); text-align: center; padding: 12px; letter-spacing: -.01em; }
 .card .cat { position: absolute; top: 10px; left: 10px; font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: rgba(255, 255, 255, .85); padding: 4px 8px; border-radius: 999px; max-width: calc(100% - 20px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .card .rep { position: absolute; left: 10px; bottom: 10px; font-size: 10px; font-weight: 500; letter-spacing: .04em; color: var(--faint); background: rgba(255, 255, 255, .85); padding: 3px 7px; border-radius: 999px; }
+.card .insb { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); background: rgba(255, 255, 255, .88); padding: 4px 8px; border-radius: 999px; }
+.card .insb::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.card.has-ins .cat { max-width: calc(100% - 100px); }
+.tbtn { display: inline; border: 0; background: none; padding: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s ease; }
+.tbtn:hover { text-decoration-color: currentColor; }
 .card .body { padding: 12px 2px 0; display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
 .card .brand { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .card h3 { margin: 0; font-size: 14.5px; font-weight: 500; line-height: 1.35; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -270,7 +276,7 @@ button { cursor: pointer; }
 .disc { margin-top: 12px; font-size: 11px; line-height: 1.5; color: var(--muted); }
 
 /* Detail panel: right drawer on desktop, bottom sheet on phones */
-.drawer.ins { width: min(520px, 100%); background: var(--surface); animation: ins-in .22s cubic-bezier(.2, .7, .2, 1); }
+.drawer.ins { width: min(560px, 100%); background: var(--surface); animation: ins-in .22s cubic-bezier(.2, .7, .2, 1); }
 .drawer.ins header { background: var(--surface); }
 .drawer.ins header h2 { font-size: 20px; }
 .drawer.ins .scroll { padding: 20px 24px 24px; }
@@ -316,6 +322,83 @@ button { cursor: pointer; }
 .rail-tex .hint { margin: 10px 0 0; max-width: none; font-size: 11.5px; line-height: 1.4; color: var(--muted); }
 .empty .btn { margin-top: 14px; }
 
+
+/* How it works: three steps under the hero */
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+.step { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 14px; align-content: start; padding: 22px 28px 24px 0; }
+.step + .step { padding-left: 28px; border-left: 1px solid var(--line); }
+.step .no { grid-row: 1 / 3; font-family: var(--serif); font-style: italic; font-size: 36px; line-height: .95; color: var(--accent); font-variation-settings: "opsz" 144; }
+.step b { font-size: 15px; font-weight: 600; line-height: 1.3; }
+.step p { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+
+/* Shop by brand: one scrolling row of brand tiles */
+.bstrip { padding-block: 36px 4px; }
+.bs-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.bs-head h2 { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 28px; line-height: 1.1; letter-spacing: -.015em; }
+.bs-head p { margin: 6px 0 0; font-size: 13.5px; color: var(--muted); }
+.bs-nav { display: flex; gap: 6px; flex: none; }
+.bs-nav button { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line-strong); background: var(--surface); display: grid; place-items: center; padding: 0; transition: border-color .12s ease; }
+.bs-nav button:hover { border-color: var(--ink); }
+.bs-nav button:disabled { opacity: .35; cursor: default; border-color: var(--line-strong); }
+.bs-nav svg { width: 16px; height: 16px; stroke: var(--ink); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bs-row { display: grid; grid-auto-flow: column; grid-auto-columns: 168px; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scrollbar-width: none; padding: 2px 2px 14px; margin: 0 -2px; }
+.bs-row::-webkit-scrollbar { display: none; }
+.btile { scroll-snap-align: start; display: flex; flex-direction: column; min-width: 0; text-align: left; padding: 0; border: 0; background: transparent; color: var(--ink); }
+.btile .bw { position: relative; aspect-ratio: 1 / 1; border-radius: var(--r-md); background: var(--well); overflow: hidden; display: grid; place-items: center; box-shadow: inset 0 0 0 0 var(--ink); transition: background .2s ease, box-shadow .15s ease; }
+.btile:hover .bw { background: var(--well-hover); }
+.btile .bw img { width: 100%; height: 100%; object-fit: contain; padding: 9%; mix-blend-mode: multiply; display: block; transition: transform .35s cubic-bezier(.2, .7, .2, 1); }
+.btile:hover .bw img { transform: scale(1.04); }
+.btile .bw .noimg { font-family: var(--serif); font-size: 16px; color: var(--faint); padding: 10px; text-align: center; }
+.btile .bc { position: absolute; left: 8px; bottom: 8px; font-size: 10.5px; font-weight: 600; letter-spacing: .03em; background: rgba(255, 255, 255, .9); color: var(--ink-2); padding: 3px 8px; border-radius: 999px; }
+.btile .bc.req { color: var(--accent); text-transform: uppercase; letter-spacing: .05em; }
+.btile .bn { margin-top: 10px; font-family: var(--serif); font-size: 17px; line-height: 1.2; letter-spacing: -.01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btile .bf { margin-top: 3px; font-size: 12px; line-height: 1.35; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.btile[aria-pressed="true"] .bw { box-shadow: inset 0 0 0 2px var(--ink); }
+
+/* Key ingredient chips (read from product names) */
+.ingbar { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.ingbar .lbl { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-right: 4px; white-space: nowrap; }
+.ichip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line-strong); background: transparent; border-radius: 999px; padding: 5px 10px; font-size: 12.5px; font-weight: 500; line-height: 1.3; color: var(--ink-2); white-space: nowrap; transition: border-color .12s ease, background .12s ease, color .12s ease; }
+.ichip:hover { border-color: var(--ink); }
+.ichip .n { font-size: 11px; color: var(--faint); }
+.ichip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.ichip[aria-pressed="true"] .n { color: rgba(255, 255, 255, .7); }
+.ichip.xtra { border-style: dashed; color: var(--muted); }
+.fmore { margin-top: 4px; width: 100%; text-align: left; padding: 8px 10px; border: 0; border-radius: var(--r-sm); background: transparent; color: var(--accent); font-size: 13px; font-weight: 600; }
+.fmore:hover { background: var(--accent-soft); }
+.clr { margin-left: 10px; border: 0; background: none; padding: 0; color: var(--accent); font-size: 13px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Product detail panel (every product; insight blocks appear when we have them) */
+.pd-img { position: relative; background: var(--well); border-radius: var(--r-md); aspect-ratio: 16 / 10; overflow: hidden; display: grid; place-items: center; }
+.pd-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 5%; mix-blend-mode: multiply; display: block; }
+.pd-img .noimg { font-family: var(--serif); font-size: 20px; color: var(--faint); }
+.pd-img .rep { position: absolute; left: 10px; bottom: 10px; font-size: 10px; font-weight: 500; letter-spacing: .04em; color: var(--muted); background: rgba(255, 255, 255, .88); padding: 3px 7px; border-radius: 999px; }
+.pd-head { margin-top: 18px; }
+.pd-head .brand { font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.pd-head h3 { margin: 4px 0 0; font-family: var(--serif); font-weight: 500; font-size: 24px; line-height: 1.2; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.pd-head .krn { margin-top: 5px; font-family: var(--kr); font-size: 13px; line-height: 1.4; color: var(--muted); }
+.pd-specs { margin: 18px 0 0; display: grid; grid-template-columns: 124px minmax(0, 1fr); border-top: 1px solid var(--line); }
+.pd-specs dt, .pd-specs dd { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 1.45; }
+.pd-specs dt { color: var(--muted); }
+.pd-specs dd small { color: var(--muted); font-size: 12px; }
+.pd-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.pd-insT { margin: 28px 0 0; padding-top: 22px; border-top: 1px solid var(--line); font-family: var(--serif); font-weight: 500; font-size: 20px; line-height: 1.2; letter-spacing: -.01em; }
+.pd-insT + .ins-lead { margin-top: 8px; }
+.pd-brand { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 12px; align-items: center; width: 100%; text-align: left; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--bg); padding: 10px 14px 10px 10px; color: var(--ink); transition: border-color .12s ease; }
+.pd-brand:hover { border-color: var(--ink); }
+.pd-brand .th { width: 56px; height: 56px; border-radius: 10px; background: var(--well); overflow: hidden; display: grid; place-items: center; }
+.pd-brand .th img { width: 100%; height: 100%; object-fit: contain; padding: 8%; mix-blend-mode: multiply; display: block; }
+.pd-brand b { display: block; font-family: var(--serif); font-weight: 500; font-size: 17px; line-height: 1.2; }
+.pd-brand .tx span { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+.pd-brand .go { font-size: 12.5px; font-weight: 600; color: var(--accent); white-space: nowrap; }
+.pd-rel { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.rel { min-width: 0; text-align: left; border: 0; background: none; padding: 0; color: var(--ink); }
+.rel .th { display: grid; place-items: center; aspect-ratio: 1 / 1; border-radius: 10px; background: var(--well); overflow: hidden; transition: background .2s ease; }
+.rel:hover .th { background: var(--well-hover); }
+.rel .th img { width: 100%; height: 100%; object-fit: contain; padding: 9%; mix-blend-mode: multiply; display: block; }
+.rel .nm { margin-top: 6px; font-size: 11.5px; line-height: 1.3; color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pd-note { margin-top: 18px; font-size: 11px; line-height: 1.5; color: var(--muted); }
+
 footer { border-top: 1px solid var(--line); background: var(--surface); }
 footer .wrap { padding-block: 28px 40px; font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px; }
 footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
@@ -330,11 +413,11 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 @media (max-width: 960px) {
   .groups { display: none; }
   .brand-panel { grid-template-columns: 120px minmax(0, 1fr); padding: 18px; }
-  .brand-panel .actions { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
   .layout { grid-template-columns: 1fr; gap: 0; padding-block: 20px 64px; }
   .rail { display: none; }
   .chips { display: grid; gap: 10px; margin-bottom: 18px; }
   .chips > div { min-width: 0; }
+  .chips > div:has(> .chip-row:empty) { display: none; }
   .chip-row { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
   .chip-row::-webkit-scrollbar { display: none; }
   .chip { flex: 0 0 auto; border: 1px solid var(--line-strong); background: var(--surface); border-radius: 999px; padding: 7px 13px; font-size: 13px; font-weight: 500; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
@@ -354,7 +437,6 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   .brand-panel { grid-template-columns: 1fr; }
   .brand-panel .bp-thumb { max-width: 160px; }
   .brand-panel h2 { font-size: 26px; }
-  .brand-panel .hero { max-width: none; }
   .top .wrap { gap: 10px; }
   .mark .tag { display: none; }
   .mark .name { font-size: 17px; }
@@ -391,6 +473,30 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   .scales { column-gap: 8px; }
   .sc .sl { padding-right: 2px; }
 }
+@media (max-width: 960px) {
+  .bstrip { padding-block: 28px 0; }
+  .bs-nav { display: none; }
+  .bs-row { grid-auto-columns: 148px; margin: 0 -20px; padding: 2px 20px 12px; scroll-padding-left: 20px; }
+  .ingbar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -20px 14px; padding: 2px 20px 6px; }
+  .ingbar::-webkit-scrollbar { display: none; }
+}
+@media (max-width: 640px) {
+  .steps { grid-template-columns: 1fr; }
+  .step { padding: 16px 0; }
+  .step + .step { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .step .no { font-size: 30px; }
+  .bs-head h2 { font-size: 24px; }
+  .bs-row { grid-auto-columns: 132px; gap: 12px; }
+  .btile .bn { font-size: 16px; }
+  .card .insb { top: 8px; right: 8px; }
+  .pd-head h3 { font-size: 21px; }
+  .pd-specs { grid-template-columns: 108px minmax(0, 1fr); }
+  .pd-rel { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pd-rel .rel:nth-child(n+4) { display: none; }
+  .pd-brand { grid-template-columns: 48px minmax(0, 1fr); }
+  .pd-brand .th { width: 48px; height: 48px; }
+  .pd-brand .go { display: none; }
+}
 </style>
 </head>
 <body>
@@ -418,13 +524,30 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     <h1>Korean beauty, <em>ready to ship</em> to your market.</h1>
   </div>
   <div>
-    <p>Browse the brands we supply, add products to an inquiry list, and send it to us. We reply with trade pricing, MOQ and lead times for your country.</p>
+    <p>One catalog of the Korean beauty brands we supply, with retail prices for reference. Trade pricing, MOQ and lead times are quoted for your market.</p>
     <div class="facts">
       <div><b id="fBrands" class="num">25</b><span>Brands</span></div>
       <div><b id="fSkus" class="num">877</b><span>Products</span></div>
       <div><b>USD</b><span>Retail (MSRP)</span></div>
     </div>
   </div>
+</section>
+
+<section class="wrap steps" aria-label="How it works">
+  <div class="step"><span class="no" aria-hidden="true">1</span><b>Browse the catalog</b><p>Filter by brand, category, key ingredient or texture. Open any product for details.</p></div>
+  <div class="step"><span class="no" aria-hidden="true">2</span><b>Build an inquiry list</b><p>Add products and quantities, or ask for a brand&rsquo;s full product list.</p></div>
+  <div class="step"><span class="no" aria-hidden="true">3</span><b>Send it to us</b><p>Copy the list into an email or message. We reply with trade pricing, MOQ and lead times.</p></div>
+</section>
+
+<section class="wrap bstrip" aria-labelledby="bsTitle">
+  <div class="bs-head">
+    <div><h2 id="bsTitle">Shop by brand</h2><p id="bsNote"></p></div>
+    <div class="bs-nav">
+      <button type="button" id="bsPrev" aria-label="Scroll brands back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+      <button type="button" id="bsNext" aria-label="Scroll brands forward"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+    </div>
+  </div>
+  <div class="bs-row" id="brandStrip"></div>
 </section>
 
 <main class="wrap layout" id="shop">
@@ -455,6 +578,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     </div>
     <div id="brandPanel" hidden></div>
     <div class="groups" id="groups" aria-label="Product groups"></div>
+    <div class="ingbar" id="ingBar" role="group" aria-label="Key ingredient" hidden></div>
     <div class="toolbar">
       <p class="count" id="count">Loading catalog&hellip;</p>
       <label class="sort" for="sort">Sort
@@ -501,7 +625,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 </aside>
 <aside class="drawer ins" id="insight" hidden aria-labelledby="insTitle" role="dialog" aria-modal="true">
   <header>
-    <h2 id="insTitle">Texture &amp; review insight</h2>
+    <h2 id="insTitle">Product details</h2>
     <button class="x" id="closeIns" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
   </header>
   <div class="scroll" id="insBody"></div>
@@ -512,9 +636,9 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
 <script>
 (function () {
   const $ = (s) => document.querySelector(s);
-  const state = { brand: null, group: 'All', cat: 'All', q: '', sort: 'brand', shown: 48, inq: [], texOnly: false, tex: new Set() };
+  const state = { brand: null, group: 'All', cat: 'All', q: '', sort: 'brand', shown: 48, inq: [], texOnly: false, tex: new Set(), ing: null, ingAll: false, brandsAll: false };
   const GROUP_LABEL = { 'Sets & More': 'Sets & more' };
-  let DATA = null, BRANDS = {}, IMG = {}, SCALES = {}, HAS_INS = false, insId = null;
+  let DATA = null, BRANDS = {}, IMG = {}, SCALES = {}, ING = {}, HAS_INS = false, insId = null, opener = null;
   // Texture filters read our 1-5 scale values (see catalog.json "scales").
   const TEX = [
     { id: 'light', label: 'Lightweight', test: (v) => v.texture <= 2 },
@@ -587,8 +711,10 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       + (x.note ? `<div class="ins-note">${esc(x.note)}</div>` : '')
       + `<div class="disc">${esc(DISCLAIMER)}</div></div>`;
   }
+  function inScope(p) { return (!state.brand || p.b === state.brand) && (state.group === 'All' || p.g === state.group) && (state.cat === 'All' || p.c === state.cat); }
+  function hasIng(p) { return !state.ing || (p.tg || []).includes(state.ing); }
   function renderTex() {
-    const base = DATA.products.filter((p) => (!state.brand || p.b === state.brand) && (state.group === 'All' || p.g === state.group) && (state.cat === 'All' || p.c === state.cat));
+    const base = DATA.products.filter((p) => inScope(p) && hasIng(p));
     const withIns = base.filter((p) => p.ins);
     const show = HAS_INS && base.length > 0;
     $('#texRail').hidden = !show; $('#texChipsWrap').hidden = !show;
@@ -613,31 +739,84 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     const b = $('#insAdd'); b.dataset.add = id; b.setAttribute('aria-pressed', added);
     b.innerHTML = added ? CHECK + 'Added to inquiry' : PLUS + 'Add to inquiry';
   }
-  function openInsight(id) {
-    const p = DATA.byId[id]; if (!p || !p.ins) return;
+  function thumbOf(p, fallback) { return p.i && IMG[p.i] ? `<img src="${IMG[p.i]}" alt="" decoding="async">` : (fallback || ''); }
+  // Detail panel for any product. Texture & review insight blocks are added when the product has them.
+  function openDetail(id) {
+    const p = DATA.byId[id]; if (!p) return;
     const b = BRANDS[p.b], x = p.ins;
     insId = id;
-    const img = p.i && IMG[p.i] ? `<img src="${IMG[p.i]}" alt="">` : `<span>${esc(b.name)}</span>`;
-    const sub = [x.kind, p.v].filter(Boolean).map(esc).join(' · ');
-    $('#insBody').innerHTML = `<div class="ins-head"><div class="th">${img}</div><div><div class="brand">${esc(b.name)}</div><h3>${esc(p.nn)}</h3>${sub ? `<div class="sub">${sub}</div>` : ''}</div></div>`
-      + (x.tl ? `<div class="ins-lead">${esc(x.tl)}</div>` : '') + insScales(x) + insFacts(x) + insAI(x);
+    const tags = (p.tg || []).filter((k) => ING[k]).map((k) => `<button class="ichip" type="button" data-ing="${k}" data-close>${esc(ING[k])}</button>`).join('');
+    const specs = [
+      ['Category', esc(GROUP_LABEL[p.g] || p.g) + ' &rsaquo; ' + esc(p.c)],
+      x && x.kind ? ['Type', esc(x.kind)] : null,
+      p.v ? ['Size', esc(p.v)] : null,
+      p.p != null ? ['Retail price', `<span class="num">${money(p.p)}</span> <small>MSRP, USD</small>`] : null,
+      ['Trade price', 'Quoted with MOQ and lead time when you send an inquiry'],
+      tags ? ['Key ingredients', `<div class="pd-tags">${tags}</div><small>Named in the product title. Select one to see similar products.</small>`] : null,
+      b.note ? ['Sales conditions', esc(b.note)] : null,
+    ].filter(Boolean).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+    const rel = DATA.products.filter((q) => q !== p && q.b === p.b && q.c === p.c)
+      .sort((m, n) => (n.l === p.l) - (m.l === p.l) || (!!(n.i && IMG[n.i])) - (!!(m.i && IMG[m.i]))).slice(0, 4);
+    const bthumb = b.thumb && IMG[b.thumb] ? `<img src="${IMG[b.thumb]}" alt="">` : '';
+    $('#insBody').innerHTML = `<div class="pd-img">${thumbOf(p, `<span class="noimg">${esc(b.name)}</span>`)}${p.ir && p.i && IMG[p.i] ? '<span class="rep">Representative photo</span>' : ''}</div>`
+      + `<div class="pd-head"><div class="brand">${esc(b.name)}</div><h3>${esc(p.nn)}</h3>${p.k ? `<div class="krn">${esc(p.k)}</div>` : ''}</div>`
+      + `<dl class="pd-specs">${specs}</dl>`
+      + (x ? `<div class="pd-insT">Texture &amp; review insight</div>${x.tl ? `<div class="ins-lead">${esc(x.tl)}</div>` : ''}` + insScales(x) + insFacts(x) + insAI(x) : '')
+      + `<div class="ins-sec"><h4>Brand</h4><button class="pd-brand" type="button" data-brand="${b.id}" data-close><span class="th">${bthumb}</span><span class="tx"><b>${esc(b.name)}</b><span>${esc(b.tagline || b.desc || b.kr || '')}</span></span><span class="go">View brand <span aria-hidden="true">&rarr;</span></span></button></div>`
+      + (rel.length ? `<div class="ins-sec"><h4>More ${esc(p.c)} from ${esc(b.name)}</h4><div class="pd-rel">${rel.map((q) => `<button class="rel" type="button" data-view="${q.id}"><span class="th">${thumbOf(q)}</span><span class="nm">${esc(q.nn)}</span></button>`).join('')}</div></div>` : '')
+      + `<div class="pd-note">Product images are for reference. Retail prices are suggested retail (MSRP) from brand offer sheets.</div>`;
     insAddLabel(id);
     $('#insight').hidden = false; $('#scrim').hidden = false;
     document.body.style.overflow = 'hidden';
     $('#insBody').scrollTop = 0;
     setTimeout(() => $('#closeIns').focus(), 0);
   }
-  function closeInsight() {
+  function closeInsight(skipFocus) {
+    if ($('#insight').hidden) return;
     $('#insight').hidden = true; $('#scrim').hidden = true;
     document.body.style.overflow = '';
-    const back = insId && document.querySelector(`[data-ins="${insId}"]`);
-    insId = null;
+    const id = insId, from = opener;
+    insId = null; opener = null;
+    if (skipFocus === true) return;
+    const back = from && document.contains(from) ? from : (id && document.querySelector(`.tbtn[data-view="${id}"]`));
     if (back) back.focus();
+  }
+
+  // Key ingredient chips: counts within the current brand, group and category
+  function renderIng() {
+    const el = $('#ingBar');
+    const n = {}, br = {};
+    DATA.products.forEach((p) => { if (inScope(p)) (p.tg || []).forEach((k) => { if (ING[k]) { n[k] = (n[k] || 0) + 1; (br[k] = br[k] || new Set()).add(p.b); } }); });
+    if (state.ing && !n[state.ing]) state.ing = null;
+    // carried by the most brands first, then by number of products
+    const keys = Object.keys(n).sort((x, y) => br[y].size - br[x].size || n[y] - n[x] || ING[x].localeCompare(ING[y]));
+    el.hidden = !keys.length;
+    if (!keys.length) { el.innerHTML = ''; return; }
+    const LIMIT = 8;
+    let show = state.ingAll ? keys : keys.slice(0, LIMIT);
+    if (state.ing && !show.includes(state.ing)) show = show.concat(state.ing);
+    el.innerHTML = '<span class="lbl">Key ingredient</span>'
+      + show.map((k) => `<button class="ichip" type="button" data-ing="${k}" aria-pressed="${state.ing === k}">${esc(ING[k])}<span class="n num">${n[k]}</span></button>`).join('')
+      + (keys.length > LIMIT ? `<button class="ichip xtra" type="button" id="ingMore" aria-expanded="${state.ingAll}">${state.ingAll ? 'Show fewer' : '+' + (keys.length - LIMIT) + ' more'}</button>` : '');
+  }
+
+  // Shop by brand: built once, then only the pressed state changes
+  function buildStrip() {
+    const listed = DATA.brands.filter((b) => b.count).sort((x, y) => y.count - x.count);
+    const onReq = DATA.brands.filter((b) => !b.count);
+    $('#bsNote').textContent = `${listed.length} brands with product lists` + (onReq.length ? ` · ${onReq.length} more on request` : '');
+    $('#brandStrip').innerHTML = listed.concat(onReq).map((b) => {
+      const img = b.thumb && IMG[b.thumb] ? `<img src="${IMG[b.thumb]}" alt="" loading="lazy" decoding="async">` : `<span class="noimg">${esc(b.name)}</span>`;
+      return `<button class="btile" type="button" data-brand="${b.id}" aria-pressed="false"><span class="bw">${img}<span class="bc num${b.count ? '' : ' req'}">${b.count ? b.count + ' products' : 'On request'}</span></span><span class="bn">${esc(b.name)}</span><span class="bf">${esc(b.tagline || b.focus || b.kr || '')}</span></button>`;
+    }).join('');
+    const row = $('#brandStrip');
+    const sync = () => { $('#bsPrev').disabled = row.scrollLeft < 4; $('#bsNext').disabled = row.scrollLeft + row.clientWidth > row.scrollWidth - 4; };
+    row.addEventListener('scroll', sync, { passive: true }); addEventListener('resize', sync); sync();
   }
 
   function filtered() {
     const q = state.q.trim().toLowerCase();
-    let list = DATA.products.filter((p) => (!state.brand || p.b === state.brand) && (state.group === 'All' || p.g === state.group) && (state.cat === 'All' || p.c === state.cat));
+    let list = DATA.products.filter((p) => inScope(p) && hasIng(p));
     if (texOn()) list = list.filter(texMatch);
     if (q) {
       const terms = q.split(/\s+/);
@@ -657,9 +836,14 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
         <span><span class="fn">${esc(b.name)}</span><span class="fk kr">${esc(b.kr)}</span></span>
         <span class="fc num ${b.count ? '' : 'req'}">${b.count ? b.count : 'On request'}</span>
       </button>`;
+    const listed = DATA.brands.filter((b) => b.count), onReq = DATA.brands.filter((b) => !b.count);
+    const pinned = !!state.brand && !BRANDS[state.brand].count; // an on-request brand is selected: keep the list open
+    const open = state.brandsAll || pinned;
     $('#brandList').innerHTML = `
       <button class="fitem all" type="button" data-brand="" aria-pressed="${!state.brand}"><span class="fn">All brands</span><span class="fc num">${total}</span></button>`
-      + DATA.brands.map(item).join('');
+      + listed.concat(open ? onReq : []).map(item).join('')
+      + (onReq.length && listed.length && !pinned ? `<button class="fmore" type="button" id="brandsMore" aria-expanded="${open}">${open ? 'Hide brands on request' : '+ ' + onReq.length + ' brands on request'}</button>` : '');
+    document.querySelectorAll('#brandStrip .btile').forEach((t) => t.setAttribute('aria-pressed', t.dataset.brand === state.brand));
     $('#railBrandCount').textContent = DATA.brands.length;
     const chip = (b) => `<button class="chip" type="button" data-brand="${b.id}" aria-pressed="${state.brand === b.id}">${esc(b.name)}${b.count ? `<span class="n">${b.count}</span>` : '<span class="req">Request</span>'}</button>`;
     $('#brandChips').innerHTML = `<button class="chip" type="button" data-brand="" aria-pressed="${!state.brand}">All brands</button>` + DATA.brands.map(chip).join('');
@@ -677,8 +861,8 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     const thumb = b.thumb && IMG[b.thumb] ? `<img src="${IMG[b.thumb]}" alt="" decoding="async">` : `<span class="noimg">${esc(b.name)}</span>`;
     const kicker = (b.focus ? esc(b.focus) + ' · ' : '') + (b.count ? `${b.count} products listed` : 'Product list on request');
     const heroes = (b.heroes || []).map((h) => b.count
-      ? `<button class="hero" type="button" data-q="${esc(h.n)}" title="Find in this brand"><b>${esc(h.n)}</b>${h.note ? `<span>${esc(h.note)}</span>` : ''}</button>`
-      : `<span class="hero"><b>${esc(h.n)}</b>${h.note ? `<span>${esc(h.note)}</span>` : ''}</span>`).join('');
+      ? `<button class="bp-hero" type="button" data-q="${esc(h.n)}" title="Find in this brand"><b>${esc(h.n)}</b>${h.note ? `<span>${esc(h.note)}</span>` : ''}</button>`
+      : `<span class="bp-hero"><b>${esc(h.n)}</b>${h.note ? `<span>${esc(h.note)}</span>` : ''}</span>`).join('');
     const hi = b.heroIns;
     const heroIns = hi && hi.sc && hi.sc.length ? `<div class="bp-ins">
         <div class="bi-main"><p class="bi-kicker">Hero product · texture &amp; review insight</p><h3>${esc(hi.n)}</h3>${hi.tl ? `<div class="ins-lead">${esc(hi.tl)}</div>` : ''}${insScales(hi)}</div>
@@ -688,8 +872,12 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     el.innerHTML = `
       <div class="bp-thumb">${thumb}</div>
       <div class="bp-main">
-        <p class="bp-kicker">${kicker}</p>
-        <h2>${esc(b.name)}<small>${esc(b.kr)}</small></h2>
+        <div class="bp-top"><div><p class="bp-kicker">${kicker}</p>
+        <h2>${esc(b.name)}<small>${esc(b.kr)}</small></h2></div>
+        <div class="actions">
+          ${b.count ? '' : `<button class="btn btn-ink" type="button" data-brand-req="${b.id}" aria-pressed="${inInq}">${inInq ? CHECK + ' Added to inquiry' : 'Request product list'}</button>`}
+          <button class="btn btn-outline" type="button" id="clearBrand">All brands</button>
+        </div></div>
         ${b.tagline ? `<p class="bp-tag">${esc(b.tagline)}</p>` : ''}
         ${b.desc ? `<p>${esc(b.desc)}</p>` : ''}
         ${b.strengths && b.strengths.length ? `<ul class="bp-str">${b.strengths.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
@@ -697,10 +885,6 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
         ${b.count ? '' : `<p>We can source this brand. Ask for the full product list and pricing.</p>`}
         ${cats ? `<div class="req-cats">${cats}</div>` : ''}
         ${notes.length ? `<div class="notes">${notes.join('')}</div>` : ''}
-      </div>
-      <div class="actions">
-        ${b.count ? '' : `<button class="btn btn-ink" type="button" data-brand-req="${b.id}" aria-pressed="${inInq}">${inInq ? CHECK + ' Added to inquiry' : 'Request product list'}</button>`}
-        <button class="btn btn-outline" type="button" id="clearBrand">All brands</button>
       </div>${heroIns}`;
     el.hidden = false;
   }
@@ -748,13 +932,13 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     const b = BRANDS[p.b];
     const added = state.inq.some((x) => x.t === 'p' && x.id === p.id);
     const img = p.i && IMG[p.i] ? `<img src="${IMG[p.i]}" alt="" loading="lazy" decoding="async">` : `<span class="noimg">${esc(b.name)}</span>`;
-    return `<article class="card">
-      <div class="well">${img}<span class="cat">${esc(p.c)}</span>${p.ir && p.i && IMG[p.i] ? '<span class="rep">Representative photo</span>' : ''}</div>
+    return `<article class="card${p.ins ? ' has-ins' : ''}">
+      <button class="well" type="button" data-view="${p.id}" tabindex="-1" aria-hidden="true">${img}<span class="cat">${esc(p.c)}</span>${p.ins ? '<span class="insb">Insight</span>' : ''}${p.ir && p.i && IMG[p.i] ? '<span class="rep">Representative photo</span>' : ''}</button>
       <div class="body">
         <div class="brand">${esc(b.name)}</div>
-        <h3>${esc(p.nn)}</h3>
+        <h3><button class="tbtn" type="button" data-view="${p.id}">${esc(p.nn)}</button></h3>
         ${p.k ? `<div class="krn">${esc(p.k)}</div>` : ''}
-        ${p.ins ? `${p.ins.tl ? `<div class="tl">${esc(p.ins.tl)}</div>` : ''}${scalesHtml(p.ins.sc, true)}<button class="ins-link" type="button" data-ins="${p.id}">Texture &amp; review <span>insight <span aria-hidden="true">&rarr;</span></span></button>` : ''}
+        ${p.ins ? `${p.ins.tl ? `<div class="tl">${esc(p.ins.tl)}</div>` : ''}${scalesHtml(p.ins.sc, true)}<button class="ins-link" type="button" data-view="${p.id}">Texture &amp; review <span>insight <span aria-hidden="true">&rarr;</span></span></button>` : ''}
         <div class="meta"><span class="vol">${esc(p.v)}</span><span class="price num">${p.p != null ? money(p.p) + '<small>MSRP</small>' : ''}</span></div>
         <button class="add" type="button" data-add="${p.id}" aria-pressed="${added}">${added ? CHECK + 'Added' : PLUS + 'Add to inquiry'}</button>
       </div>
@@ -772,12 +956,13 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       return;
     }
     const texLbl = !texOn() ? '' : ' · ' + (state.tex.size ? TEX.filter((t) => state.tex.has(t.id)).map((t) => t.label).join(' + ') : 'Texture insight');
-    const where = (b ? ' in ' + esc(b.name) : '') + (state.group !== 'All' ? ' · ' + esc(GROUP_LABEL[state.group] || state.group) : '') + (state.cat !== 'All' ? ' · ' + esc(state.cat) : '') + esc(texLbl);
-    $('#count').innerHTML = `<b>${list.length.toLocaleString('en-US')}</b> product${list.length === 1 ? '' : 's'}${where}${state.q ? ` matching &ldquo;${esc(state.q.trim())}&rdquo;` : ''}`;
+    const where = (b ? ' in ' + esc(b.name) : '') + (state.group !== 'All' ? ' · ' + esc(GROUP_LABEL[state.group] || state.group) : '') + (state.cat !== 'All' ? ' · ' + esc(state.cat) : '') + (state.ing ? ' · ' + esc(ING[state.ing]) : '') + esc(texLbl);
+    const narrowed = state.group !== 'All' || state.cat !== 'All' || state.ing || texOn() || state.q.trim();
+    $('#count').innerHTML = `<b>${list.length.toLocaleString('en-US')}</b> product${list.length === 1 ? '' : 's'}${where}${state.q ? ` matching &ldquo;${esc(state.q.trim())}&rdquo;` : ''}${narrowed ? '<button class="clr" type="button" id="clearAll">Clear filters</button>' : ''}`;
     if (!list.length) {
       g.innerHTML = texOn()
         ? `<div class="empty" style="grid-column:1/-1"><b>No products match</b>Texture insight covers a selection of products so far.<br><button class="btn btn-outline btn-sm" type="button" id="clearTex">Clear texture filters</button></div>`
-        : `<div class="empty" style="grid-column:1/-1"><b>No products match</b>Try another search or clear the filters.</div>`;
+        : `<div class="empty" style="grid-column:1/-1"><b>No products match</b>Try another search or clear the filters.<br><button class="btn btn-outline btn-sm" type="button" id="clearAll">Clear filters</button></div>`;
       $('#more').hidden = true; return;
     }
     g.innerHTML = list.slice(0, state.shown).map(card).join('');
@@ -785,7 +970,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     $('#more').textContent = `Show more (${list.length - state.shown} left)`;
   }
 
-  function renderAll() { renderBrands(); renderPanel(); renderGroups(); renderCats(); renderTex(); renderGrid(); }
+  function renderAll() { renderBrands(); renderPanel(); renderGroups(); renderCats(); renderIng(); renderTex(); renderGrid(); }
 
   function setBrand(id) {
     state.brand = id || null;
@@ -848,6 +1033,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
       if (x.t === 'brand') { lines.push(`${i + 1}. [${BRANDS[x.id].name}] Full product list and pricing`); return; }
       const p = DATA.byId[x.id]; if (!p) return;
       lines.push(`${i + 1}. [${BRANDS[p.b].name}] ${p.nn}${p.v ? ' (' + p.v + ')' : ''}${x.qty ? ' — qty ' + x.qty : ''}`);
+      if (p.ins && p.ins.tl) lines.push('   Texture: ' + p.ins.tl);
     });
     return lines.join('\n');
   }
@@ -855,13 +1041,24 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   // Events
   document.addEventListener('click', (e) => {
     const t = e.target.closest('button'); if (!t) return;
+    const inPanel = !!t.closest('#insight');
+    if (t.dataset.close !== undefined) closeInsight(true);
+    if (t.dataset.view) { if (!inPanel) opener = t.classList.contains('well') ? t.parentElement.querySelector('.tbtn') : t; openDetail(t.dataset.view); return; }
     if (t.dataset.brand !== undefined) setBrand(t.dataset.brand);
-    else if (t.dataset.group) { state.group = t.dataset.group; state.cat = 'All'; state.shown = PAGE; renderGroups(); renderCats(); renderTex(); renderGrid(); }
-    else if (t.dataset.q !== undefined) { state.q = t.dataset.q.replace(/[^\w\s]/g, ' '); $('#q').value = state.q; state.group = 'All'; state.cat = 'All'; state.shown = PAGE; renderGroups(); renderCats(); renderTex(); renderGrid(); $('#grid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    else if (t.dataset.cat) { state.cat = t.dataset.cat; state.shown = PAGE; renderCats(); renderTex(); renderGrid(); }
+    else if (t.dataset.ing) {
+      state.ing = state.ing === t.dataset.ing && !inPanel ? null : t.dataset.ing;
+      state.shown = PAGE; renderIng(); renderTex(); renderGrid();
+      if (inPanel) $('#shop').scrollIntoView({ block: 'start' });
+    }
+    else if (t.id === 'ingMore') { state.ingAll = !state.ingAll; renderIng(); }
+    else if (t.id === 'brandsMore') { state.brandsAll = !state.brandsAll; renderBrands(); }
+    else if (t.id === 'clearAll') { state.group = 'All'; state.cat = 'All'; state.ing = null; state.texOnly = false; state.tex.clear(); state.q = ''; $('#q').value = ''; state.shown = PAGE; renderGroups(); renderCats(); renderIng(); renderTex(); renderGrid(); }
+    else if (t.id === 'bsPrev' || t.id === 'bsNext') { const row = $('#brandStrip'); row.scrollBy({ left: (t.id === 'bsNext' ? 1 : -1) * Math.max(240, row.clientWidth * .8), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }
+    else if (t.dataset.group) { state.group = t.dataset.group; state.cat = 'All'; state.shown = PAGE; renderGroups(); renderCats(); renderIng(); renderTex(); renderGrid(); }
+    else if (t.dataset.q !== undefined) { state.q = t.dataset.q.replace(/[^\w\s]/g, ' '); $('#q').value = state.q; state.group = 'All'; state.cat = 'All'; state.ing = null; state.shown = PAGE; renderGroups(); renderCats(); renderIng(); renderTex(); renderGrid(); $('#grid').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    else if (t.dataset.cat) { state.cat = t.dataset.cat; state.shown = PAGE; renderCats(); renderIng(); renderTex(); renderGrid(); }
     else if (t.dataset.tx) toggleTex(t.dataset.tx);
     else if (t.id === 'clearTex') { state.texOnly = false; state.tex.clear(); state.shown = PAGE; renderTex(); renderGrid(); }
-    else if (t.dataset.ins) openInsight(t.dataset.ins);
     else if (t.id === 'closeIns') closeInsight();
     else if (t.dataset.tip !== undefined) t.setAttribute('aria-expanded', t.getAttribute('aria-expanded') !== 'true');
     else if (t.dataset.add) toggleProduct(t.dataset.add);
@@ -905,13 +1102,13 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
   });
 
   function boot(d) {
-    DATA = d; IMG = d.images; SCALES = d.scales || {};
+    DATA = d; IMG = d.images; SCALES = d.scales || {}; ING = Object.fromEntries(d.ingredients || []);
     d.brands.forEach((b) => { BRANDS[b.id] = b; });
     d.byId = {};
     d.products.forEach((p, i) => {
       p.id = p.b + '-' + i;
       p.nn = prettify(p.n);
-      p._s = (p.n + ' ' + p.k + ' ' + p.c + ' ' + (p.g || '') + ' ' + p.l + ' ' + BRANDS[p.b].name + ' ' + BRANDS[p.b].kr).toLowerCase();
+      p._s = (p.n + ' ' + p.k + ' ' + p.c + ' ' + (p.g || '') + ' ' + p.l + ' ' + BRANDS[p.b].name + ' ' + BRANDS[p.b].kr + ' ' + (p.tg || []).map((k) => ING[k] || '').join(' ')).toLowerCase();
       d.byId[p.id] = p;
       if (p.ins && !(p.ins.sc && p.ins.sc.some(([k, v]) => SCALES[k] && v >= 1 && v <= 5))) delete p.ins; // no drawable scale: plain card
       if (p.ins) {
@@ -926,7 +1123,7 @@ footer .fm { font-family: var(--serif); font-size: 16px; color: var(--ink); }
     state.inq = load('kbtc-inq', []).filter((x) => (x.t === 'p' && d.byId[x.id]) || (x.t === 'brand' && BRANDS[x.id]));
     const h = location.hash.replace('#', '');
     if (h.startsWith('brand-') && BRANDS[h.slice(6)]) state.brand = h.slice(6);
-    renderAll(); syncInq();
+    buildStrip(); renderAll(); syncInq();
   }
 
   fetch('data/catalog.json').then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(boot).catch(() => {
