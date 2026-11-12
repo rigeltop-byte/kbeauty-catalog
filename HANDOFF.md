@@ -166,5 +166,17 @@ tools/              데이터 재생성 스크립트 (아래 참고)
   - 모바일: 제품 목록 없는 브랜드에서 빈 Type·Categories 줄을 숨김.
 - 확인: 1) 데스크톱·375px에서 화면과 가로 넘침 없음, 콘솔 오류 없음 2) 검색, 그룹·분류·성분·텍스처 필터, 정렬, 더 보기, 문의 담기·저장, Esc 닫기, 닫은 뒤 포커스 복귀를 같은 순서로 조작해 확인.
 - 게시 전 검사 결과: 이미지 밖 텍스트에 공급가·MOQ·바코드·링크 0건. 인사이트 문구 245개 중 걸린 것은 제품 공식명 "Skin Repair Serum" 1건뿐. 성분·척도 표시명과 화면 문구 0건.
-- **남은 판단(대표)**: 브랜드 소개 카드에는 예전부터 유통 채널명(Olive Young·Musinsa·Amazon 등 9곳)과 효능처럼 읽힐 수 있는 표현(redness-prone, blackheads, repair, clinical, hair-loss symptom relief 등 14곳)이 있다. 이번에는 손대지 않았다. 인사이트와 같은 기준(사용감 표현)으로 고치려면 `handoff/brand-highlights/brand_highlights.json`을 고치고 `tools/apply_brands.py`를 다시 돌린다.
+- **남은 판단(대표)** → 2026-11-12에 "브랜드 공식 주장은 넣는다"로 결정, 아래 절 참고: 브랜드 소개 카드에는 예전부터 유통 채널명(Olive Young·Musinsa·Amazon 등 9곳)과 효능처럼 읽힐 수 있는 표현(redness-prone, blackheads, repair, clinical, hair-loss symptom relief 등 14곳)이 있다. 이번에는 손대지 않았다. 인사이트와 같은 기준(사용감 표현)으로 고치려면 `handoff/brand-highlights/brand_highlights.json`을 고치고 `tools/apply_brands.py`를 다시 돌린다.
 - 안 한 것: 척도 비교(지시서 3번), 인사이트 제품 확대(Aside 담당), 회사명·연락처 교체.
+- 게시(2026-11-11, 대표 지시): `handoff/`를 빼고 공개 저장소 main에 반영(커밋 `153f4df`, 직전 게시본 `672f6f2`). Pages 빌드 완료 후 공개 주소에서 확인: 제품 876개, 성분 태그 518개, 인사이트 23개, 브랜드 줄 25개, 상세 패널 열림, 콘솔 오류 없음. KERI·SIHACNC 주소도 정상. 되돌리려면 공개 저장소에서 `git revert 153f4df` 후 푸시.
+
+### 브랜드 소개 카드 문구 기준 확정 (2026-11-12, Claude Code · Fable 5.2)
+- **대표 결정**: 브랜드가 공식적으로 내세우는 주장(기능성, 시험 결과, 대상 피부 고민 등)은 브랜드 소개 카드에 **넣는다**. 이 사이트는 대중이 아니라 바이어가 보는 자료이고, 바이어가 브랜드를 이해하는 데 필요하기 때문이다.
+- 경과: 같은 날 먼저 "효능 표현만 수정" 지시로 18곳을 제품 사실 위주로 바꿨다가, 위 결정에 따라 전부 원래 문구로 되돌렸다. `brand_highlights.json`, `data/catalog.json`, `tools/apply_brands.py`는 게시본(공개 커밋 `153f4df`)과 같은 상태다.
+- 기준 정리
+  - 브랜드 소개 카드(`tagline`, `desc`, `strengths`, `heroes`): 브랜드사 발표·언론 보도에 있는 주장은 쓴다. 우리가 새 효능을 지어내지 않는다. 유통 채널명도 둔다.
+  - 텍스처·리뷰 인사이트(`ins`, `heroIns`): 소비자 의견을 우리가 요약한 것이므로 종전대로 **사용감**으로만 쓴다. `apply_insights.py`의 문구 점검도 그대로다.
+  - 공급가·MOQ·바코드·브랜드 홈페이지 링크, 리뷰 출처명·별점·리뷰 수 금지는 변함없다.
+- 화면 추가 1건: 브랜드 소개 카드 아래에 "Brand and product descriptions, including test results and functional claims, are as published by the brand." 한 줄(`.bp-src`). 주장의 주체가 브랜드임을 밝히는 문구다. 빼려면 `index.html`의 `renderPanel()`에서 `bp-src` 줄을 지운다.
+- 확인이 덜 된 것: 끄레뷰는 조사 신뢰도 낮음(브랜드사 소개서로 확인 필요). `strengths_kr`에 "(브랜드 주장)" 표시가 있는 항목(샤르드 임상 5종, 닥터엘시아 345 성분 조합, 끄레뷰 이중 기능성, 피토스 P1P)은 브랜드사 확인 전이다.
+- 게시: 아직 안 함. 공개 주소와의 차이는 위 한 줄뿐이다.
